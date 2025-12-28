@@ -1,6 +1,8 @@
 <template>
   <main>
     <SectionsHero />
+    <SectionsBooking />
+    <SectionsPartners />
   </main>
 </template>
 
