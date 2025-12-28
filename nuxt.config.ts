@@ -5,6 +5,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
+      apiBase: 'https://api.aerodeus.uz/api',
       siteUrl: '',
       siteName: 'Aerodeus',
       siteDescription: 'Reliable freight and logistics services for businesses nationwide.',
