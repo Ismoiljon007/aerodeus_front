@@ -1,6 +1,7 @@
 <template>
   <main>
-    <SectionsHero />
+    <!-- <SectionsHero /> -->
+    <SectionsBenefits/>
   </main>
 </template>
 
