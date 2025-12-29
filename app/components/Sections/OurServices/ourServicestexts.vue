@@ -1,135 +1,127 @@
 <template>
-    <div class="our-service-txt">
-        <div class="our-services-texts">
-            <div class="our-services-texts-top">
-                <h2>Charter Flights</h2>
+  <div class="our-service-txt">
+    <div class="our-services-texts">
+      <h2>Charter Flights</h2>
 
-                <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's when an unknown printer took a galley of type and scrambled it to make
-                </p>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+        industry's when an unknown printer took a galley of type and scrambled it to make
+      </p>
 
-                <UiButton>Band qilish</UiButton>
-            </div>
+      <UiButton>Band qilish</UiButton>
 
-            <div class="our-services-texts-bottom">
-                <div class="our-services-bottom-item">
-                    <svg height="25" width="25">
+      <div class="our-services-texts-bottom">
+        <div class="our-services-bottom-item">
+          <svg
+            height="25"
+            width="25"
+          >
 
-                        <use xlink:href="/sprite.svg#i-check" />
+            <use xlink:href="/sprite.svg#i-check" />
 
-                    </svg>
-                    <span>Certified according to Part 135</span>
-                </div>
-
-                <div class="our-services-bottom-item">
-                    <svg height="25" width="25">
-
-                        <use xlink:href="/sprite.svg#i-check" />
-
-                    </svg>
-                    <span>Certified according to Part 135</span>
-                </div>
-
-                <div class="our-services-bottom-item">
-                    <svg height="25" width="25">
-
-                        <use xlink:href="/sprite.svg#i-check" />
-
-                    </svg>
-                    <span>Certified according to Part 135</span>
-                </div>
-
-                <div class="our-services-bottom-item">
-                    <svg height="25" width="25">
-
-                        <use xlink:href="/sprite.svg#i-check" />
-
-                    </svg>
-                    <span>Certified according to Part 135</span>
-                </div>
-
-                <div class="our-services-bottom-item">
-                    <svg height="25" width="25">
-
-                        <use xlink:href="/sprite.svg#i-check" />
-
-                    </svg>
-                    <span>Certified according to Part 135</span>
-                </div>
-            </div>
+          </svg>
+          <span>Certified according to Part 135</span>
         </div>
+
+        <div class="our-services-bottom-item">
+          <svg
+            height="25"
+            width="25"
+          >
+
+            <use xlink:href="/sprite.svg#i-check" />
+
+          </svg>
+          <span>Certified according to Part 135</span>
+        </div>
+
+        <div class="our-services-bottom-item">
+          <svg
+            height="25"
+            width="25"
+          >
+
+            <use xlink:href="/sprite.svg#i-check" />
+
+          </svg>
+          <span>Certified according to Part 135</span>
+        </div>
+
+        <div class="our-services-bottom-item">
+          <svg
+            height="25"
+            width="25"
+          >
+
+            <use xlink:href="/sprite.svg#i-check" />
+
+          </svg>
+          <span>Certified according to Part 135</span>
+        </div>
+
+        <div class="our-services-bottom-item">
+          <svg
+            height="25"
+            width="25"
+          >
+
+            <use xlink:href="/sprite.svg#i-check" />
+
+          </svg>
+          <span>Certified according to Part 135</span>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
-.our-service-txt {
-    @include respond(490px) {
-        padding-bottom: 20px;
+  .our-service-txt {
+    height: 100%;
+    width: 50%;
+    @media (max-width: 1200px) {
+      width: 100%;
     }
-}
+  }
 
-.our-services-texts {
+  .our-services-texts {
     display: flex;
     flex-direction: column;
-    gap: 90px;
+    gap: 2rem;
     position: relative;
+    height: 100%;
 
-
-    @include respond(1200px) {
-        align-items: center;
+    h2 {
+      font-weight: 500;
+      font-size: 3.2rem;
     }
 
-    .our-services-texts-top {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-
-        @include respond(1200px) {
-            align-items: center;
-        }
-
-        @include respond(490px) {
-            button {
-                width: 100%;
-                position: absolute;
-                bottom: -80px;
-            }
-        }
-
-        h2 {
-            font-weight: 500;
-            font-size: 32px;
-        }
-
-        p {
-            width: 100%;
-            max-width: 543px;
-            opacity: 0.7;
-        }
-
-        @include respond(1150px) {
-            align-items: center;
-
-            p {
-                max-width: 100%;
-                text-align: center;
-            }
-        }
+    p {
+      font-weight: 400;
+      width: 100%;
+      max-width: 543px;
+      opacity: 0.7;
+      margin-bottom: 2rem;
     }
-
+    button {
+      @media (max-width: 1200px) {
+        order: 4;
+      }
+    }
     .our-services-texts-bottom {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
 
-        .our-services-bottom-item {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            opacity: 0.7;
-        }
+      .our-services-bottom-item {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        opacity: 0.7;
+      }
+      @media (max-width: 1200px) {
+        order: 3;
+      }
     }
-}
+  }
 </style>

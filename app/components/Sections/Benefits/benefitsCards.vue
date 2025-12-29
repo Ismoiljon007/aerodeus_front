@@ -1,58 +1,63 @@
 <template>
-    <div class="benefits-cards-wrapper">
+  <div class="benefits-cards-wrapper">
+    <UiCard
+      v-for="item in benifitsCards"
+      :key="item"
+      class="benefits-card"
+    >
+      <svg
+        class="bef-card-icon"
+        height="40"
+        width="40"
+      >
 
-        <UiCard class="benefits-card" v-for="item in benifitsCards">
+        <use :xlink:href="'/sprite.svg#' + `${item.iconId}`" />
 
-            <svg class="bef-card-icon" height="40" width="40">
+      </svg>
 
-                <use :xlink:href="'/sprite.svg#' + `${item.iconId}`" />
+      <h2>{{ item.title }}</h2>
 
-            </svg>
-
-            <h2>{{ item.title }}</h2>
-
-            <p>
-                {{ item.subtitle }}
-            </p>
-
-        </UiCard>
-    </div>
+      <p>
+        {{ item.subtitle }}
+      </p>
+    </UiCard>
+  </div>
 </template>
 
 <script setup>
 const benifitsCards = [
-    {
-        title: 'Oliy darajadagi farovonlik',
-        subtitle: 'Parvoz — bu zavq. Biz siz uchun charter parvozni yuqori darajadagi qulaylikni taqdim etamiz',
-        iconId: 'i-geme'
-    },
-    {
-        title: 'Ishonch, maxfiylik va himoya',
-        subtitle: 'Aerodeus sizning maxfiyligingizni kafolatlaydi va barcha jihatlar bo‘yicha siz bilan hamkorlik qiladi',
-        iconId: 'i-shield'
-    },
-    {
-        title: 'Premium klassdagi yirik jetlar',
-        subtitle: 'Bizning modellar 7–14 yo‘lovchi uchun qulaylikni ta’minlaydi',
-        iconId: 'i-samalet'
-    },
-    {
-        title: 'Dunyoning barcha nuqtalarida',
-        subtitle: 'Qayerdan va qayerga uchishingiz muhim emas, biz sizni butun dunyo bo‘ylab mahalliy bilim ta’minlaymiz',
-        iconId: 'i-globus'
-    },
-    {
-        title: 'Yuqori malakali ekipaj',
-        subtitle: 'Bizning ekipaj a’zolarimiz biznes-aviasiya sohasida ko‘p yillik tajribaga ega',
-        iconId: 'i-pilot'
-    },
-    {
-        title: 'Tezkor parvozlar, adolatli narxlar',
-        subtitle: 'Aerodeus bilan xususiy jet terminaliga kirish, bojxona va immigratsiya formalitilaridan imkon qadar tez o‘tish',
-        iconId: 'i-fast-flight'
-    },
+  {
+    title: 'Oliy darajadagi farovonlik',
+    subtitle: 'Parvoz — bu zavq. Biz siz uchun charter parvozni yuqori darajadagi qulaylikni taqdim etamiz',
+    iconId: 'i-geme',
+  },
+  {
+    title: 'Ishonch, maxfiylik va himoya',
+    subtitle: 'Aerodeus sizning maxfiyligingizni kafolatlaydi va barcha jihatlar bo‘yicha siz bilan hamkorlik qiladi',
+    iconId: 'i-shield',
+  },
+  {
+    title: 'Premium klassdagi yirik jetlar',
+    subtitle: 'Bizning modellar 7–14 yo‘lovchi uchun qulaylikni ta’minlaydi',
+    iconId: 'i-samalet',
+  },
+  {
+    title: 'Dunyoning barcha nuqtalarida',
+    subtitle: 'Qayerdan va qayerga uchishingiz muhim emas, biz sizni butun dunyo bo‘ylab mahalliy bilim ta’minlaymiz',
+    iconId: 'i-globus',
+  },
+  {
+    title: 'Yuqori malakali ekipaj',
+    subtitle: 'Bizning ekipaj a’zolarimiz biznes-aviasiya sohasida ko‘p yillik tajribaga ega',
+    iconId: 'i-pilot',
+  },
+  {
+    title: 'Tezkor parvozlar, adolatli narxlar',
+    subtitle: 'Aerodeus bilan xususiy jet terminaliga kirish, bojxona va immigratsiya formalitilaridan imkon qadar tez o‘tish',
+    iconId: 'i-fast-flight',
+  },
 
-]
+];
 </script>
 
 <style scoped lang="scss">

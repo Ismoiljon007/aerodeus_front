@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBase: 'https://api.aerodeus.uz/api',
+      apiBase: 'https://aerodeus.fargenius.uz/api/v1',
     },
   },
 

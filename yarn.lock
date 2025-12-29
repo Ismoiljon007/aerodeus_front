@@ -1389,7 +1389,7 @@
     pathe "^2.0.3"
     unimport "^5.5.0"
 
-"@nuxt/image@^2.0.0":
+"@nuxt/image@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@nuxt/image/-/image-2.0.0.tgz#62ac3ee383bd3c6bb89f95508fc9cb91cdd21220"
   integrity sha512-otHi6gAoYXKLrp8m27ZjX1PjxOPaltQ4OiUs/BhkW995mF/vXf8SWQTw68fww+Uric0v+XgoVrP9icDi+yT6zw==

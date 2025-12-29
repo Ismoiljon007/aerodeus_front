@@ -21,7 +21,7 @@ import AboutUsRight from './aboutUsRight.vue';
         .about-us-wrapper {
             display: flex;
             align-items: center;
-            gap: 350px;
+            gap: 16.5rem;
             @include respond(1200px) {
                 flex-direction: column;
                 gap: 50px;

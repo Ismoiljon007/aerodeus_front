@@ -1,26 +1,27 @@
+<template>
+  <div class="our-services">
+    <div class="container">
+      <div class="our-services-wrapper">
+        <h2 class="our-services-wrapper__title">
+          Bizning xizmatlarimiz
+        </h2>
+        <p class="our-services-wrapper__sub-title">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+        </p>
+
+        <div class="images-and-texts-wrp">
+          <OurServicesPhotos />
+          <OurServicestexts />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import OurServicesPhotos from './ourServicesPhotos.vue';
 import OurServicestexts from './ourServicestexts.vue';
-
 </script>
-
-<template>
-    <div class="our-services">
-        <div class="container">
-            <div class="our-services-wrapper">
-                <h2 class="our-services-wrapper__title">Bizning xizmatlarimiz</h2>
-                <p class="our-services-wrapper__sub-title">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                </p>
-
-                <div class="images-and-texts-wrp">
-                    <OurServicesPhotos />
-                    <OurServicestexts />
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
 
 <style scoped lang="scss">
 .our-services {
@@ -34,12 +35,9 @@ import OurServicestexts from './ourServicestexts.vue';
         }
 
         &__title {
-            font-weight: 500;
-            font-size: 42px;
+            @include heading-1;
+           margin-bottom: 1.8rem;
 
-            @include respond(750px) {
-                font-size: 30px;
-            }
         }
 
         &__sub-title {
@@ -58,12 +56,10 @@ import OurServicestexts from './ourServicestexts.vue';
 
         .images-and-texts-wrp {
             display: flex;
-            align-items: flex-start;
-            gap: 90px;
+            gap: 9rem;
             padding: 50px 0;
             @include respond(1270px) {
-                gap: 50px;
-                align-items: center;
+              gap: 50px;
             }
 
             @include respond(1270px) {

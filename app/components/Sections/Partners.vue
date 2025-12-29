@@ -26,6 +26,7 @@
 
 <style scoped lang="scss">
 .partners {
+  margin-bottom: 10rem;
     .container {
         display: flex;
         align-items: center;

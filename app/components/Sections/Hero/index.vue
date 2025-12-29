@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-
+defineProps<{ hero: any }>();
 </script>
 
 <style scoped lang="scss">
