@@ -8,7 +8,7 @@
         Aerodeus Afzalliklari
       </h2>
       <div class="benefits-wrapper">
-        <BenefitsCards />
+        <BenefitsCards :items="advantages?.data" />
       </div>
     </div>
   </div>
@@ -18,6 +18,8 @@
 import BenefitsCards from './benefitsCards.vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+defineProps<{ advantages?: any }>();
 
 const benefitsRef = ref<HTMLElement | null>(null);
 let benefitsContext: gsap.Context | null = null;

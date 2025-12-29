@@ -6,8 +6,8 @@
     >
       <img
         class="about-us-main-img"
-        src="/images/png/about-us-img.png"
-        alt=""
+        :src="mainImage"
+        :alt="mainImageAlt"
       >
       <div class="about-us-cards-wrapper">
         <span
@@ -39,7 +39,7 @@
         </span>
         <UiCard
           v-for="(item, idx) in stats"
-          :key="idx"
+          :key="item.id || idx"
           class="about-us-card"
         >
           <h3
@@ -60,10 +60,32 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const stats = Array.from({ length: 4 }, () => ({
-  value: 3218,
-  label: 'Mamnun mijozlar',
-}));
+const props = defineProps({
+  about: {
+    type: Object,
+    default: () => ({}),
+  },
+  statistics: {
+    type: Object,
+    default: () => ({}),
+  },
+});
+
+const mainImage = computed(() => props.about?.data?.logo_image || '/images/png/about-us-img.png');
+const mainImageAlt = computed(() => props.about?.data?.title || 'Biz haqimizda');
+const stats = computed(() => {
+  const items = props.statistics?.data;
+  if (!Array.isArray(items)) return [];
+  return [...items]
+    .slice()
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+    .map((item, index) => ({
+      id: item.id ?? index,
+      value: item.value ?? 0,
+      label: item.label || '',
+      icon: item.icon || '',
+    }));
+});
 
 const aboutLeftRef = ref<HTMLElement | null>(null);
 const lineRef = ref<HTMLElement | null>(null);

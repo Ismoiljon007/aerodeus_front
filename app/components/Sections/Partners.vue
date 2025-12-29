@@ -5,19 +5,10 @@
   >
     <div class="container">
       <NuxtImg
-        src="https://picsum.photos/1/343"
-        width="343"
-        height="75"
-        class="partners_logo"
-      />
-      <NuxtImg
-        src="https://picsum.photos/1/343"
-        width="343"
-        height="75"
-        class="partners_logo"
-      />
-      <NuxtImg
-        src="https://picsum.photos/1/343"
+        v-for="(partner, index) in partnerList"
+        :key="partner.id || index"
+        :src="partner.logo"
+        :alt="partner.name || 'Partner logo'"
         width="343"
         height="75"
         class="partners_logo"
@@ -30,13 +21,22 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+const props = defineProps<{ partners?: any }>();
+
 const partnersRef = ref<HTMLElement | null>(null);
 let partnersContext: gsap.Context | null = null;
+const partnerList = computed(() => {
+  const items = props.partners?.data;
+  if (!Array.isArray(items))
+    return [];
+  return items;
+});
 
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
   const sectionEl = partnersRef.value;
-  if (!sectionEl) return;
+  if (!sectionEl)
+    return;
 
   partnersContext = gsap.context(() => {
     const q = gsap.utils.selector(sectionEl);
@@ -74,6 +74,7 @@ onBeforeUnmount(() => {
     }
     &_logo {
       will-change: transform;
+      object-fit: contain ;
     }
 }
 </style>

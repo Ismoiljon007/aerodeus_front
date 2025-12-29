@@ -2,14 +2,15 @@
 import AboutUsLeft from './aboutUsLeft.vue';
 import AboutUsRight from './aboutUsRight.vue';
 
+defineProps<{ about?: any; statistics?: any }>();
 </script>
 
 <template>
     <div class="about-us">
         <div class="container">
             <div class="about-us-wrapper">
-                <AboutUsLeft/>
-                <AboutUsRight/>
+                <AboutUsLeft :about="about" :statistics="statistics" />
+                <AboutUsRight :about="about" />
             </div>
         </div>
     </div>

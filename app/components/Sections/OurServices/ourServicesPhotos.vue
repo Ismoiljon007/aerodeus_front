@@ -1,26 +1,31 @@
 <template>
-  <div class="our-services-photos-wrapper">
-    <div class="first-images">
+  <div
+    v-if="mainImage || sideImages.length"
+    class="our-services-photos-wrapper"
+    :class="{ 'our-services-photos-wrapper--two': twoImages }"
+  >
+    <div
+      v-if="mainImage"
+      class="first-images"
+    >
       <NuxtImg
-        src="/images/png/o-services-img-1.png"
-        alt="Our Service Main"
+        :src="mainImage"
+        :alt="`${title} main image`"
         format="webp"
-        quality="80"
+        quality="100"
         loading="lazy"
       />
     </div>
 
-    <div class="duble-img">
+    <div
+      v-if="sideImages.length"
+      class="duble-img"
+    >
       <NuxtImg
-        src="/images/png/o-services-img-2.png"
-        alt="Our Service Detail 1"
-        format="webp"
-        quality="80"
-        loading="lazy"
-      />
-      <NuxtImg
-        src="/images/png/o-services-img-3.png"
-        alt="Our Service Detail 2"
+        v-for="(image, index) in sideImages"
+        :key="image || index"
+        :src="image"
+        :alt="`${title} detail ${index + 1}`"
         format="webp"
         quality="80"
         loading="lazy"
@@ -28,6 +33,30 @@
     </div>
   </div>
 </template>
+
+<script setup>
+const props = defineProps({
+  service: {
+    type: Object,
+    default: () => ({}),
+  },
+  twoImages: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const title = computed(() => props.service?.title || 'Service');
+
+const images = computed(() => {
+  const service = props.service || {};
+  return [service.image, service.image_1, service.image_2, service.image_3].filter(Boolean);
+});
+
+const limitedImages = computed(() => images.value.slice(0, props.twoImages ? 2 : 3));
+const mainImage = computed(() => (props.twoImages ? '' : limitedImages.value[0] || ''));
+const sideImages = computed(() => (props.twoImages ? limitedImages.value : limitedImages.value.slice(1)));
+</script>
 
 <style scoped lang="scss">
 .our-services-photos-wrapper {
@@ -41,18 +70,15 @@
     }
 
     .first-images {
-        flex: 1.5;
-
         img {
-            width: 100%;
-            height: 100%;
+            width: 35.8rem;
+            height: 51rem;
             object-fit: cover;
             border-radius: 8px;
         }
     }
 
     .duble-img {
-        flex: 1.5;
         display: flex;
         flex-direction: column;
         gap: 30px;
@@ -62,8 +88,8 @@
         }
 
         img {
-            width: 100%;
-            height: calc(50% - 15px);
+            width: 33.6rem;
+            height: 24rem;
             object-fit: cover;
             border-radius: 8px;
 
@@ -71,6 +97,31 @@
                 height: calc(50% - 5px);
             }
         }
+    }
+
+    &--two {
+      .duble-img {
+        flex-direction: row;
+        gap: 30px;
+        @include respond(630px) {
+          gap: 10px;
+        }
+
+        img {
+          width: calc(50% - 15px);
+          height: 51rem;
+          &:first-child {
+            transform: translateY(-5%);
+          }
+          &:last-child {
+            transform: translateY(5%);
+          }
+
+          @include respond(630px) {
+            width: calc(50% - 5px);
+          }
+        }
+      }
     }
 }
 </style>

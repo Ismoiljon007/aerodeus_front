@@ -14,10 +14,10 @@
     <div class="container">
       <div class="hero_content">
         <h2 class="hero_title" ref="titleRef">
-          Oliy darajadagi xizmat
+          {{ hero?.data?.title || 'Oliy darajadagi xizmat' }}
         </h2>
         <p class="hero_desc" ref="descRef">
-          Premium xususiy samolyotlar bilan mutlaq qulaylik va nufuz
+          {{ hero?.data?.subtitle || 'Premium xususiy samolyotlar bilan mutlaq qulaylik va nufuz' }}
         </p>
         <UiButton class="hero_button">
           Bizning servislar

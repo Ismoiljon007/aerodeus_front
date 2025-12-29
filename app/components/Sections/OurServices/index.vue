@@ -12,9 +12,24 @@
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
         </p>
 
-        <div class="images-and-texts-wrp">
-          <OurServicesPhotos />
-          <OurServicestexts />
+        <div class="services-list">
+          <div
+            v-for="(service, index) in servicesList"
+            :key="service.id || index"
+            class="our-services-item"
+          >
+            <div class="images-and-texts-wrp">
+              <OurServicesPhotos
+                :service="service"
+                :two-images="(index + 1) % 2 === 0"
+              />
+              <OurServicestexts :service="service" />
+            </div>
+            <div
+              v-if="index < servicesList.length - 1"
+              class="our-services-divider"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -27,8 +42,15 @@ import OurServicestexts from './ourServicestexts.vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+const props = defineProps<{ services?: any }>();
+
 const servicesRef = ref<HTMLElement | null>(null);
 let servicesContext: gsap.Context | null = null;
+const servicesList = computed(() => {
+  const items = props.services?.data;
+  if (!Array.isArray(items)) return [];
+  return [...items].slice().sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+});
 
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
@@ -62,6 +84,17 @@ onMounted(() => {
       },
       '-=0.3',
     ).from(
+      q('.our-services-texts h2, .our-services-texts p, .our-services-texts button'),
+      {
+        autoAlpha: 0,
+        y: 12,
+        duration: 0.45,
+        ease: 'power2.out',
+        stagger: 0.08,
+        clearProps: 'opacity,transform,visibility',
+      },
+      '-=0.2',
+    ).from(
       q('.our-services-photos-wrapper img'),
       {
         autoAlpha: 0,
@@ -72,17 +105,6 @@ onMounted(() => {
         clearProps: 'opacity,transform,visibility',
       },
       '-=0.2',
-    ).from(
-      q('.our-services-texts h2, .our-services-texts p, .our-services-texts button'),
-      {
-        autoAlpha: 0,
-        y: 12,
-        duration: 0.45,
-        ease: 'power2.out',
-        stagger: 0.08,
-        clearProps: 'opacity,transform,visibility',
-      },
-      '-=0.25',
     ).from(
       q('.our-services-bottom-item'),
       {
@@ -150,6 +172,21 @@ onBeforeUnmount(() => {
             @include respond(1200px) {
                 flex-direction: column;
             }
+        }
+
+        .our-services-item:nth-child(even) .images-and-texts-wrp {
+          flex-direction: row-reverse;
+          @include respond(1200px) {
+            flex-direction: column;
+          }
+        }
+
+        .our-services-divider {
+          border: 1px solid;
+          border-image-source: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 48.08%, rgba(255, 255, 255, 0) 100%);
+          border-image-slice: 1;
+          width: 100%;
+          height: 0;
         }
     }
 }

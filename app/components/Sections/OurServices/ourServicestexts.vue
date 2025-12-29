@@ -1,17 +1,31 @@
 <template>
   <div class="our-service-txt">
     <div class="our-services-texts">
-      <h2>Charter Flights</h2>
+      <h2>{{ serviceTitle }}</h2>
 
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-        industry's when an unknown printer took a galley of type and scrambled it to make
+      <p v-if="serviceDescription">
+        {{ serviceDescription }}
       </p>
 
-      <UiButton>Band qilish</UiButton>
+      <NuxtLink
+        v-if="serviceLink"
+        :to="serviceLink"
+      >
+        <UiButton>{{ serviceButtonText }}</UiButton>
+      </NuxtLink>
+      <UiButton v-else>
+        {{ serviceButtonText }}
+      </UiButton>
 
-      <div class="our-services-texts-bottom">
-        <div class="our-services-bottom-item">
+      <div
+        v-if="features.length"
+        class="our-services-texts-bottom"
+      >
+        <div
+          v-for="feature in features"
+          :key="feature.id || feature.text"
+          class="our-services-bottom-item"
+        >
           <svg
             height="25"
             width="25"
@@ -20,60 +34,32 @@
             <use xlink:href="/sprite.svg#i-check" />
 
           </svg>
-          <span>Certified according to Part 135</span>
-        </div>
-
-        <div class="our-services-bottom-item">
-          <svg
-            height="25"
-            width="25"
-          >
-
-            <use xlink:href="/sprite.svg#i-check" />
-
-          </svg>
-          <span>Certified according to Part 135</span>
-        </div>
-
-        <div class="our-services-bottom-item">
-          <svg
-            height="25"
-            width="25"
-          >
-
-            <use xlink:href="/sprite.svg#i-check" />
-
-          </svg>
-          <span>Certified according to Part 135</span>
-        </div>
-
-        <div class="our-services-bottom-item">
-          <svg
-            height="25"
-            width="25"
-          >
-
-            <use xlink:href="/sprite.svg#i-check" />
-
-          </svg>
-          <span>Certified according to Part 135</span>
-        </div>
-
-        <div class="our-services-bottom-item">
-          <svg
-            height="25"
-            width="25"
-          >
-
-            <use xlink:href="/sprite.svg#i-check" />
-
-          </svg>
-          <span>Certified according to Part 135</span>
+          <span>{{ feature.text }}</span>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+const props = defineProps({
+  service: {
+    type: Object,
+    default: () => ({}),
+  },
+});
+
+const serviceTitle = computed(() => props.service?.title || '');
+const serviceDescription = computed(() => props.service?.description || '');
+const serviceButtonText = computed(() => props.service?.button_text || 'Band qilish');
+const serviceLink = computed(() => props.service?.button_link || '');
+const features = computed(() => {
+  const items = props.service?.features;
+  if (!Array.isArray(items))
+    return [];
+  return [...items].slice().sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+});
+</script>
 
 <style scoped lang="scss">
   .our-service-txt {
@@ -112,12 +98,19 @@
       display: flex;
       flex-direction: column;
       gap: 15px;
+      margin-top: auto;
 
       .our-services-bottom-item {
         display: flex;
         align-items: center;
         gap: 13px;
+        span {
         opacity: 0.7;
+
+        }
+        svg {
+          color: $color-yellow;
+        }
       }
       @media (max-width: 1200px) {
         order: 3;

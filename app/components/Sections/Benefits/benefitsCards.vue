@@ -1,19 +1,19 @@
 <template>
   <div class="benefits-cards-wrapper">
     <UiCard
-      v-for="item in benifitsCards"
-      :key="item"
+      v-for="item in cards"
+      :key="item.id"
       class="benefits-card"
     >
-      <svg
+      <img
+        v-if="item.iconUrl"
         class="bef-card-icon"
-        height="40"
+        :src="item.iconUrl"
+        :alt="item.title || 'Afzallik ikonasi'"
         width="40"
+        height="40"
+        loading="lazy"
       >
-
-        <use :xlink:href="'/sprite.svg#' + `${item.iconId}`" />
-
-      </svg>
 
       <h2>{{ item.title }}</h2>
 
@@ -25,39 +25,27 @@
 </template>
 
 <script setup>
-const benifitsCards = [
-  {
-    title: 'Oliy darajadagi farovonlik',
-    subtitle: 'Parvoz — bu zavq. Biz siz uchun charter parvozni yuqori darajadagi qulaylikni taqdim etamiz',
-    iconId: 'i-geme',
+const props = defineProps({
+  items: {
+    type: Array,
+    default: () => [],
   },
-  {
-    title: 'Ishonch, maxfiylik va himoya',
-    subtitle: 'Aerodeus sizning maxfiyligingizni kafolatlaydi va barcha jihatlar bo‘yicha siz bilan hamkorlik qiladi',
-    iconId: 'i-shield',
-  },
-  {
-    title: 'Premium klassdagi yirik jetlar',
-    subtitle: 'Bizning modellar 7–14 yo‘lovchi uchun qulaylikni ta’minlaydi',
-    iconId: 'i-samalet',
-  },
-  {
-    title: 'Dunyoning barcha nuqtalarida',
-    subtitle: 'Qayerdan va qayerga uchishingiz muhim emas, biz sizni butun dunyo bo‘ylab mahalliy bilim ta’minlaymiz',
-    iconId: 'i-globus',
-  },
-  {
-    title: 'Yuqori malakali ekipaj',
-    subtitle: 'Bizning ekipaj a’zolarimiz biznes-aviasiya sohasida ko‘p yillik tajribaga ega',
-    iconId: 'i-pilot',
-  },
-  {
-    title: 'Tezkor parvozlar, adolatli narxlar',
-    subtitle: 'Aerodeus bilan xususiy jet terminaliga kirish, bojxona va immigratsiya formalitilaridan imkon qadar tez o‘tish',
-    iconId: 'i-fast-flight',
-  },
+});
 
-];
+const cards = computed(() => {
+  if (!props.items?.length)
+    return [];
+
+  return [...props.items]
+    .slice()
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+    .map((item, index) => ({
+      id: item.id ?? index,
+      title: item.title || '',
+      subtitle: item.description || '',
+      iconUrl: item.icon || '',
+    }));
+});
 </script>
 
 <style scoped lang="scss">
