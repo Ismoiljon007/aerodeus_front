@@ -1,6 +1,5 @@
 <template>
   <main>
-    <SectionsContact />
     <SectionsHero :hero="hero" />
     <SectionsBooking />
     <SectionsPartners :partners="partners" />
@@ -13,6 +12,7 @@
       :about="about"
       :statistics="statistics"
     />
+    <SectionsContact />
   </main>
 </template>
 

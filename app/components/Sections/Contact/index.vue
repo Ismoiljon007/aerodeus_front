@@ -1,7 +1,7 @@
 <template>
   <section class="contact-section">
     <div class="container">
-      <div class="contact-section__content">
+      <UiCard class="contact-section__content">
         <div class="contact-section__header">
           <h2 class="contact-section__title">
             Biz bilan aloqa
@@ -16,7 +16,8 @@
           @submit.prevent="handleSubmit"
         >
           <div class="contact-form__fields">
-            <div class="contact-form__field">
+           <div class="contact-form__left">
+             <div class="contact-form__field">
               <label
                 class="contact-form__label"
                 for="name"
@@ -45,8 +46,10 @@
                 required
               >
             </div>
+           </div>
 
-            <div class="contact-form__field contact-form__field--full">
+            <div class="contact-form__right">
+              <div class="contact-form__field">
               <label
                 class="contact-form__label"
                 for="email"
@@ -61,30 +64,22 @@
                 placeholder="Yozilsin..."
               >
             </div>
+            <UiButton
+              variant="primary"
+              class="contact-form__submit"
+            >
+              Yuborish
+            </UiButton>
+            </div>
           </div>
-
-          <button
-            type="submit"
-            class="contact-form__submit"
-          >
-            Yuborish
-          </button>
         </form>
+
+        <div class="contact-divider"></div>
 
         <div class="contact-info">
           <div class="contact-info__item">
             <div class="contact-info__icon contact-info__icon--location">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-                  fill="currentColor"
-                />
-              </svg>
+             <IconsLocation/>
             </div>
             <div class="contact-info__content">
               <p class="contact-info__label">
@@ -99,17 +94,7 @@
 
           <div class="contact-info__item">
             <div class="contact-info__icon contact-info__icon--phone">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
-                  fill="currentColor"
-                />
-              </svg>
+              <IconsPhone/>
             </div>
             <div class="contact-info__content">
               <p class="contact-info__label">
@@ -123,17 +108,7 @@
 
           <div class="contact-info__item">
             <div class="contact-info__icon contact-info__icon--email">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
-                  fill="currentColor"
-                />
-              </svg>
+             <IconsEmail/>
             </div>
             <div class="contact-info__content">
               <p class="contact-info__label">
@@ -145,7 +120,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </UiCard>
     </div>
   </section>
 </template>
@@ -169,4 +144,171 @@ function handleSubmit() {
 </script>
 
 <style lang="scss" scoped>
+.contact-section {
+  padding: 56px 0;
+  margin-bottom: 100px;
+  @media (max-width: 768px) {
+    padding: 38px;
+    margin-bottom: 30px;
+  }
+  
+  &__content {
+    padding: 50px;
+    @media (max-width: 768px) {
+    padding: 18px;
+    }
+  }
+  &__header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  &__title{
+    font-size: 42px;
+    line-height: 100%;
+    font-weight: 500;
+    text-align: center;
+    @media (max-width: 768px) {
+    font-size: 24px;
+  }
+  }
+  &__subtitle{
+    font-size: 20px;
+    margin-top: 18px;
+    line-height: 150%;
+    opacity: 0.7;
+    font-weight: normal;
+    text-align: center;
+    @media (max-width: 768px) {
+    font-size: 16px;
+  }}
+}
+
+.contact-form {
+  margin-top: 40px;
+  @media (max-width: 768px) {
+    margin-top: 24px;
+  }
+  &__fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) auto;
+    gap: 16px;
+    align-items: end;
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  &__left{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  &__right{
+    display: flex;
+    gap: 16px;
+    align-items: end;
+    @media (max-width: 1024px) {
+      flex-direction: column;
+      align-items: stretch;
+  }
+  }
+  &__field{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+  &__label{
+    font-size: 14px;
+    line-height: 100%;
+  }
+  &__input{
+    border: 1px solid #FFFFFF33;
+    padding: 14px 16px;
+    background: #040A2480;
+    border-radius: 10px;
+    width: 100%;
+  }
+}
+
+.contact-divider{
+  margin: 40px auto;
+  border: 1px solid;
+  border-image-source: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 48.08%, rgba(255, 255, 255, 0) 100%);
+  border-image-slice: 1;
+  width: 100%;
+  height: 0; 
+  @media (max-width: 768px) {
+    margin: 24px auto;
+  }
+}
+
+// Contact Info
+.contact-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+
+  @media (max-width: 1220px) {
+    gap: 20px;
+  }
+  @media (max-width: 1024px) {
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 1024px) {
+    justify-content: flex-start;
+  }
+
+  &__item {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    border: 1px solid #FFFFFF33;
+    @media (max-width: 1220px) {
+      width: 60px;
+      height: 60px;
+      svg{
+        width: 30px;
+        height: 30px;
+      }
+    }
+    @media (max-width: 768px) {
+      width: 40px;
+      height: 40px;
+      border: none;
+    }
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__label {
+    color: #FFFFFFB2;
+    line-height: 100%;
+  }
+
+  &__value {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 140%;
+    margin-top: 10px;
+  }
+}
 </style>
