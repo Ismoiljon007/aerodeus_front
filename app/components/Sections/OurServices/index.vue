@@ -84,35 +84,13 @@ onMounted(() => {
       },
       '-=0.3',
     ).from(
-      q('.our-services-texts h2, .our-services-texts p, .our-services-texts button'),
+      q('.images-and-texts-wrp'),
       {
         autoAlpha: 0,
-        y: 12,
-        duration: 0.45,
+        y: 16,
+        duration: 0.35,
         ease: 'power2.out',
         stagger: 0.08,
-        clearProps: 'opacity,transform,visibility',
-      },
-      '-=0.2',
-    ).from(
-      q('.our-services-photos-wrapper img'),
-      {
-        autoAlpha: 0,
-        y: 12,
-        duration: 0.5,
-        ease: 'power2.out',
-        stagger: 0.08,
-        clearProps: 'opacity,transform,visibility',
-      },
-      '-=0.2',
-    ).from(
-      q('.our-services-bottom-item'),
-      {
-        autoAlpha: 0,
-        y: 10,
-        duration: 0.4,
-        ease: 'power2.out',
-        stagger: 0.06,
         clearProps: 'opacity,transform,visibility',
       },
       '-=0.2',

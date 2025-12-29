@@ -12,7 +12,7 @@
         :src="mainImage"
         :alt="`${title} main image`"
         format="webp"
-        quality="100"
+        quality="80"
         loading="lazy"
       />
     </div>
