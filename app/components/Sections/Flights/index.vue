@@ -52,11 +52,11 @@
           },
           1024: {
             slidesPerView: 4,
-            spaceBetween: 50,
+            spaceBetween: 30,
           },
           1280: {
             slidesPerView: 4,
-            spaceBetween: 50,
+            spaceBetween: 30,
           },
         }"
         class="flights__swiper"

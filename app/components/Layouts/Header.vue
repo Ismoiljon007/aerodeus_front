@@ -4,8 +4,17 @@
     class="site-header"
   >
     <div class="container">
-      <div class="lang">
-        <button class="lang_button">
+      <div
+        ref="langRef"
+        class="lang"
+      >
+        <button
+          type="button"
+          class="lang_button"
+          :aria-expanded="openLang"
+          aria-haspopup="listbox"
+          @click="toggleLang"
+        >
           <svg
             height="24"
             width="24"
@@ -22,6 +31,7 @@
             v-for="locale in availableLocales"
             :key="locale.code"
             :to="switchLocalePath(locale.code)"
+            @click="openLang = false"
           >
             {{ locale.name }}
           </NuxtLink>
@@ -102,13 +112,29 @@ const availableLocales = computed(() => {
   return locales.value.filter(i => i.code !== locale.value);
 });
 const openLang = ref<boolean>(false);
+const langRef = ref<HTMLElement | null>(null);
 const headerRef = ref<HTMLElement | null>(null);
 let headerContext: gsap.Context | null = null;
 
+function toggleLang() {
+  openLang.value = !openLang.value;
+}
+
+function handleOutsideClick(event: MouseEvent) {
+  const langEl = langRef.value;
+  if (!langEl || !openLang.value)
+    return;
+  if (!langEl.contains(event.target as Node)) {
+    openLang.value = false;
+  }
+}
+
 onMounted(() => {
   const headerEl = headerRef.value;
-  if (!headerEl) return;
+  if (!headerEl)
+    return;
 
+  document.addEventListener('click', handleOutsideClick);
   headerContext = gsap.context(() => {
     const q = gsap.utils.selector(headerEl);
     const items = q('.lang, .sitenav, .site-logo, .site-header_button, .site-header_menu');
@@ -126,6 +152,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   headerContext?.revert();
   headerContext = null;
+  document.removeEventListener('click', handleOutsideClick);
 });
 </script>
 
@@ -208,6 +235,7 @@ onBeforeUnmount(() => {
 }
 .lang {
   position: relative;
+  z-index: 1;
   &_button {
     display: flex;
     align-items: center;
@@ -217,6 +245,32 @@ onBeforeUnmount(() => {
     border: none;
     color: $color-white;
     font-size: 1.8rem;
+  }
+  &_list {
+    position: absolute;
+    top: calc(100% + 0.8rem);
+    left: 0;
+    min-width: 12rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1rem;
+    border-radius: 1.2rem;
+    border: 1px solid rgba($color: $color-white, $alpha: 0.1);
+    background: rgba($color: $color-white, $alpha: 0.03);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0px 32px 0 rgba($color: $color-bg, $alpha: 0.5) inset;
+    a {
+      color: $color-white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      padding: 0.4rem 0.6rem;
+      border-radius: 0.6rem;
+      transition: background 0.12s ease;
+      &:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+    }
   }
 }
 </style>

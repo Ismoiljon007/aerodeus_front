@@ -1,5 +1,16 @@
 <template>
   <section class="map">
+    <NuxtPicture
+      src="/images/jpg/map-bg.jpg"
+      format="webp"
+      quality="100"
+      preload
+      loading="eager"
+      width="100%"
+      height="1069"
+      :picture-attrs="{ class: 'map__picture' }"
+      :img-attrs="{ class: 'map__img', alt: '' }"
+    />
     <div class="container map__shell">
       <div class="content">
         <h2>{{ sectionTitle }}</h2>
@@ -119,7 +130,7 @@ interface GeographySectionResponse {
   data: GeographySection
 }
 
-type MarkerKind = 'from' | 'to';
+    type MarkerKind = 'from' | 'to';
 
 interface MarkerBase {
   key: string
@@ -568,310 +579,376 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-.map {
-  --map-card: rgba(255, 255, 255, 0.08);
-  --map-stroke: rgba(255, 255, 255, 0.12);
-  --map-text: rgba(255, 255, 255, 0.94);
-  --map-muted: rgba(255, 255, 255, 0.65);
-  --map-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-  --map-from: #d7ff3f;
-  --map-to: #7bd5ff;
-  padding: 10rem 0 12rem;
-  color: var(--map-text);
-}
+    .map {
+        --map-card: rgba(255, 255, 255, 0.08);
+        --map-stroke: rgba(255, 255, 255, 0.12);
+        --map-text: rgba(255, 255, 255, 0.94);
+        --map-muted: rgba(255, 255, 255, 0.65);
+        --map-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        --map-from: #d7ff3f;
+        --map-to: #7bd5ff;
+        margin-bottom: 16rem;
 
-.map__shell {
-  display: grid;
-  gap: 2rem;
-}
+        color: var(--map-text);
+        position: relative;
+        overflow: hidden;
 
-.map__topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.6rem;
-  padding: 1.6rem 1.8rem;
-  border-radius: 1.8rem;
-  border: 1px solid var(--map-stroke);
+        &::after {
+            content: "";
+            width: 100%;
+            height: 49rem;
+            display: block;
+            background: linear-gradient(180deg, #0E1530 0%, rgba(14, 21, 48, 0) 100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none; // Click eventlarni o'tkazish
+        }
 
-  @include respond(900px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
+        &::before {
+            content: "";
+            width: 100%;
+            height: 49rem;
+            display: block;
+            background: linear-gradient(0deg, #0E1530 0%, rgba(14, 21, 48, 0) 100%);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            pointer-events: none; // Click eventlarni o'tkazish
+        }
+    }
 
-.map__title {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+    :deep(picture) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+        pointer-events: none;
+    }
 
-  b {
-    font-size: 1.5rem;
-    letter-spacing: 0.02rem;
-  }
+    :deep(.map__img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-  span {
-    font-size: 1.2rem;
-    color: var(--map-muted);
-  }
-}
+    .content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.8rem;
+        margin-bottom: 4rem;
 
-.map__actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
+        h2 {
+            @include heading-1;
+        }
 
-.map__btn {
-  border: 1px solid var(--map-stroke);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--map-text);
-  padding: 1rem 1.4rem;
-  border-radius: 1.4rem;
-  cursor: pointer;
-  transition: transform 0.12s ease, background 0.12s ease;
-  font-weight: 600;
-  font-size: 1.2rem;
+        p {
+            font-weight: 400;
+        }
+    }
 
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-1px);
-  }
+    .map__shell {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 2rem;
+    }
 
-  &:active {
-    transform: translateY(0);
-  }
+    .map__topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.6rem;
+        padding: 1.6rem 1.8rem;
+        border-radius: 1.8rem;
+        border: 1px solid var(--map-stroke);
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-  }
-}
+        @include respond(900px) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
 
-.map__wrap {
-  position: relative;
-  width: 100%;
-  height: 90rem;
-  aspect-ratio: 1009.6727 / 665.96301;
-  overflow: hidden;
-}
+    .map__title {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
 
-.map__host {
-  position: absolute;
-  inset: 0;
-}
+        b {
+            font-size: 1.5rem;
+            letter-spacing: 0.02rem;
+        }
 
-.map__overlay {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
+        span {
+            font-size: 1.2rem;
+            color: var(--map-muted);
+        }
+    }
 
-.map__route {
-  opacity: 0.6;
-  stroke-width: 2.2;
-  fill: none;
-  stroke-linecap: round;
-  stroke: rgba(255, 255, 255, 0.55);
-  stroke-dasharray: 6 6;
-  animation: mapDash 2.2s linear infinite;
-}
+    .map__actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
 
-.map__marker-layer {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
+    .map__btn {
+        border: 1px solid var(--map-stroke);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--map-text);
+        padding: 1rem 1.4rem;
+        border-radius: 1.4rem;
+        cursor: pointer;
+        transition: transform 0.12s ease, background 0.12s ease;
+        font-weight: 600;
+        font-size: 1.2rem;
 
-.map__marker {
-  --pin-scale: 1;
-  position: absolute;
-  left: 0;
-  top: 0;
-  transform: translate(-50%, -100%) scale(var(--pin-scale));
-  transform-origin: center bottom;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.8rem;
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  pointer-events: auto;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.45));
-  animation: mapPinPulse 2.4s ease-in-out infinite;
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
 
-  &:focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.65);
-    outline-offset: 4px;
-    border-radius: 999px;
-  }
+        &:active {
+            transform: translateY(0);
+        }
 
-  &.is-active .map__photo {
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
-  }
-}
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+    }
 
-.map__photo {
-  width: 6rem;
-  height: 6rem;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  transition: transform 0.18s ease;
-}
+    .map__wrap {
+        position: relative;
+        width: 100%;
+        height: 80rem;
+        aspect-ratio: 1009.6727 / 665.96301;
+        overflow: hidden;
+    }
 
-.map__photo--fallback {
-  border-color: rgba(255, 255, 255, 0.8);
-}
+    .map__host {
+        position: absolute;
+        inset: 0;
+    }
 
-.map__marker:hover .map__photo {
-  transform: scale(1.04);
-}
+    .map__overlay {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
 
-.map__pin-line {
-  width: 2px;
-  height: 2.4rem;
-  background: rgba(255, 255, 255, 0.9);
-}
+    .map__route {
+        opacity: 0.6;
+        stroke-width: 2.2;
+        fill: none;
+        stroke-linecap: round;
+        stroke: rgba(255, 255, 255, 0.55);
+        stroke-dasharray: 6 6;
+        animation: mapDash 2.2s linear infinite;
+    }
 
-.map__pin-dot {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.9);
-}
+    .map__marker-layer {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
 
-.map__tip {
-  position: absolute;
-  z-index: 5;
-  width: 28rem;
-  display: flex;
-  gap: 1.2rem;
-  padding: 1.2rem;
-  border-radius: 1.8rem;
-  background: rgba(10, 15, 28, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px);
-  transform: translate(1.2rem, calc(-100% - 1.2rem));
-  transform-origin: left bottom;
+    .map__marker {
+        --pin-scale: 1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: translate(-50%, -100%) scale(var(--pin-scale));
+        transform-origin: center bottom;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        pointer-events: auto;
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.45));
+        animation: mapPinPulse 2.4s ease-in-out infinite;
 
-  &::after {
-    content: "";
-    position: absolute;
-    left: 1.4rem;
-    bottom: -0.8rem;
-    width: 1.4rem;
-    height: 1.4rem;
-    background: rgba(10, 15, 28, 0.92);
-    border-right: 1px solid rgba(255, 255, 255, 0.12);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    transform: rotate(45deg);
-  }
+        &:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.65);
+            outline-offset: 4px;
+            border-radius: 999px;
+        }
 
-  img {
-    width: 7.6rem;
-    height: 7.6rem;
-    border-radius: 1.6rem;
-    object-fit: cover;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(255, 255, 255, 0.06);
-    flex: 0 0 auto;
-  }
-}
+        &.is-active .map__photo {
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+        }
+    }
 
-.map__tip-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  min-width: 0;
+    .map__photo {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        transition: transform 0.18s ease;
+    }
 
-  b {
-    font-size: 1.4rem;
-    line-height: 1.2;
-    letter-spacing: 0.02rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
+    .map__photo--fallback {
+        border-color: rgba(255, 255, 255, 0.8);
+    }
 
-.map__tip-country {
-  color: var(--map-muted);
-  font-size: 1.2rem;
-}
+    .map__marker:hover .map__photo {
+        transform: scale(1.04);
+    }
 
-.map__hint {
-  padding: 1rem 1.4rem;
-  border-radius: 1.6rem;
-  border: 1px dashed rgba(255, 255, 255, 0.16);
-  color: var(--map-muted);
-  font-size: 1.2rem;
-  background: rgba(255, 255, 255, 0.03);
-  display: grid;
-  gap: 0.4rem;
+    .map__pin-line {
+        width: 2px;
+        height: 2.4rem;
+        background: rgba(255, 255, 255, 0.9);
+    }
 
-  code {
-    color: rgba(255, 255, 255, 0.85);
-  }
-}
+    .map__pin-dot {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.9);
+    }
 
-.map__hint-line {
-  display: block;
-}
+    .map__tip {
+        position: absolute;
+        z-index: 5;
+        width: 28rem;
+        display: flex;
+        gap: 1.2rem;
+        padding: 1.2rem;
+        border-radius: 1.8rem;
+        background: rgba(10, 15, 28, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(12px);
+        transform: translate(1.2rem, calc(-100% - 1.2rem));
+        transform-origin: left bottom;
 
-:deep(.map__host svg) {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
+        &::after {
+            content: "";
+            position: absolute;
+            left: 1.4rem;
+            bottom: -0.8rem;
+            width: 1.4rem;
+            height: 1.4rem;
+            background: rgba(10, 15, 28, 0.92);
+            border-right: 1px solid rgba(255, 255, 255, 0.12);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            transform: rotate(45deg);
+        }
 
-:deep(.map__host path) {
-  fill: rgba(255, 255, 255, 0.08);
-  stroke: rgba(255, 255, 255, 0.1);
-  stroke-width: 0.7;
-  transition: fill 0.15s ease, stroke 0.15s ease;
-}
+        img {
+            width: 7.6rem;
+            height: 7.6rem;
+            border-radius: 1.6rem;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+            flex: 0 0 auto;
+        }
+    }
 
-:deep(.map__host path:hover) {
-  fill: rgba(255, 255, 255, 0.12);
-  stroke: rgba(255, 255, 255, 0.18);
-}
+    .map__tip-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        min-width: 0;
 
-:deep(.map__host path.is-highlight) {
-  fill: rgba(67, 108, 255, 0.35);
-  stroke: rgba(67, 108, 255, 0.8);
-}
+        b {
+            font-size: 1.4rem;
+            line-height: 1.2;
+            letter-spacing: 0.02rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
 
-@keyframes mapDash {
-  to {
-    stroke-dashoffset: -24;
-  }
-}
+    .map__tip-country {
+        color: var(--map-muted);
+        font-size: 1.2rem;
+    }
 
-@keyframes mapPinPulse {
-  0%,
-  100% {
-    transform: translate(-50%, -100%) scale(var(--pin-scale));
-  }
-  50% {
-    transform: translate(-50%, -100%) scale(calc(var(--pin-scale) * 0.8));
-  }
-}
+    .map__hint {
+        padding: 1rem 1.4rem;
+        border-radius: 1.6rem;
+        border: 1px dashed rgba(255, 255, 255, 0.16);
+        color: var(--map-muted);
+        font-size: 1.2rem;
+        background: rgba(255, 255, 255, 0.03);
+        display: grid;
+        gap: 0.4rem;
 
-@media (prefers-reduced-motion: reduce) {
-  .map__marker,
-  .map__route {
-    animation: none;
-  }
-}
+        code {
+            color: rgba(255, 255, 255, 0.85);
+        }
+    }
+
+    .map__hint-line {
+        display: block;
+    }
+
+    :deep(.map__host svg) {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    :deep(.map__host path) {
+        fill: rgba(255, 255, 255, 0.08);
+        stroke: rgba(255, 255, 255, 0.1);
+        stroke-width: 0.7;
+        transition: fill 0.15s ease, stroke 0.15s ease;
+    }
+
+    :deep(.map__host path:hover) {
+        fill: rgba(255, 255, 255, 0.12);
+        stroke: rgba(255, 255, 255, 0.18);
+    }
+
+    :deep(.map__host path.is-highlight) {
+        fill: rgba(67, 108, 255, 0.35);
+        stroke: rgba(67, 108, 255, 0.8);
+    }
+
+    @keyframes mapDash {
+        to {
+            stroke-dashoffset: -24;
+        }
+    }
+
+    @keyframes mapPinPulse {
+
+        0%,
+        100% {
+            transform: translate(-50%, -100%) scale(var(--pin-scale));
+        }
+
+        50% {
+            transform: translate(-50%, -100%) scale(calc(var(--pin-scale) * 0.8));
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .map__marker,
+        .map__route {
+            animation: none;
+        }
+    }
 </style>
