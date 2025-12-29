@@ -11,12 +11,37 @@
 html {
   scroll-behavior: smooth;
   font-size: 62.5%;
+
+  @include respond(1470px) {
+    font-size: 60%;
+  }
+
+  @include respond(1200px) {
+    font-size: 56.25%;
+  }
+
+  @include respond(992px) {
+    font-size: 53.125%;
+  }
+
+  @include respond(768px) {
+    font-size: 50%;
+  }
+
+  @include respond(480px) {
+    font-size: 46.875%;
+  }
+
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  scroll-padding-top: 8rem;
 }
 
 
 body {
   margin: 0;
   font-family: 'SF Pro Display', -apple-system, sans-serif;
+  font-weight: 500;
   font-size: 1.8rem;
   line-height: 1.5;
   background: $color-bg;

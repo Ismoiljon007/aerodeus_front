@@ -1,9 +1,8 @@
 <template>
-<<<<<<< Updated upstream
-  <div />
-=======
   <main>
-    <!-- <SectionsHero /> -->
+    <SectionsHero />
+    <SectionsBooking />
+    <SectionsPartners />
     <SectionsBenefits/>
     <SectionsOurServices/>
     <SectionsBusinessAviation/>
@@ -12,7 +11,6 @@
     <SectionsHowWeWork/>
     <SectionsAboutUs/>
   </main>
->>>>>>> Stashed changes
 </template>
 
 <script setup lang="ts">

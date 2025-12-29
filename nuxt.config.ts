@@ -6,19 +6,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBase: 'https://api.aerodeus.uz/api',
-      siteUrl: '',
-      siteName: 'Aerodeus',
-      siteDescription: 'Reliable freight and logistics services for businesses nationwide.',
-      siteLocale: 'en_US',
-      siteLang: 'en',
-      siteImage: '',
-      twitterHandle: '',
-    },
-  },
-
-  nitro: {
-    prerender: {
-      routes: ['/sitemap.xml', '/robots.txt'],
     },
   },
 
@@ -32,5 +19,13 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@nuxt/image', '@nuxt/eslint', 'v-gsap-nuxt'],
+  modules: ['@nuxt/image', '@nuxt/eslint', 'v-gsap-nuxt', '@nuxtjs/i18n'],
+  i18n: {
+    locales: [
+      { code: 'en', name: 'En' },
+      { code: 'ru', name: 'Ru' },
+      { code: 'uz', name: 'Uz' },
+    ],
+    defaultLocale: 'en',
+  },
 });

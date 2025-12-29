@@ -80,5 +80,9 @@ const iconClass = computed(() => {
     opacity: 0.5;
     cursor: not-allowed;
   }
+  &.active {
+    background: $color-white;
+    color: #000;
+  }
 }
 </style>
