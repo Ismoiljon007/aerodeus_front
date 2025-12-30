@@ -4,10 +4,10 @@
       <UiCard class="contact-section__content">
         <div class="contact-section__header">
           <h2 class="contact-section__title">
-            Biz bilan aloqa
+            {{ $t('contact.title') }}
           </h2>
           <p class="contact-section__subtitle">
-            Ma'lumotlarni qoldiring va biz imkon qadar tezroq siz bilan bog'lanamiz
+            {{ $t('contact.subtitle') }}
           </p>
         </div>
 
@@ -16,89 +16,97 @@
           @submit.prevent="handleSubmit"
         >
           <div class="contact-form__fields">
-           <div class="contact-form__left">
-             <div class="contact-form__field">
-              <label
-                class="contact-form__label"
-                for="name"
-              >Ism</label>
-              <input
-                id="name"
-                v-model="formData.name"
-                type="text"
-                class="contact-form__input"
-                placeholder="Yozilsin..."
-                required
-              >
-            </div>
+            <div class="contact-form__left">
+              <div class="contact-form__field">
+                <label
+                  class="contact-form__label"
+                  for="name"
+                >{{ $t('contact.form.name') }}</label>
+                <input
+                  id="name"
+                  v-model="formData.name"
+                  type="text"
+                  class="contact-form__input"
+                  :placeholder="$t('contact.form.placeholder')"
+                  required
+                >
+              </div>
 
-            <div class="contact-form__field">
-              <label
-                class="contact-form__label"
-                for="phone"
-              >Telefon raqam</label>
-              <input
-                id="phone"
-                v-model="formData.phone"
-                type="tel"
-                class="contact-form__input"
-                placeholder="Yozilsin..."
-                required
-              >
+              <div class="contact-form__field">
+                <label
+                  class="contact-form__label"
+                  for="email"
+                >{{ $t('contact.form.email') }}</label>
+                <input
+                  id="email"
+                  v-model="formData.email"
+                  type="email"
+                  class="contact-form__input"
+                  :placeholder="$t('contact.form.placeholder')"
+                  required
+                >
+              </div>
             </div>
-           </div>
 
             <div class="contact-form__right">
               <div class="contact-form__field">
-              <label
-                class="contact-form__label"
-                for="email"
+                <label
+                  class="contact-form__label"
+                  for="message"
+                >
+                  {{ $t('contact.form.message') }}
+                </label>
+                <input
+                  id="message"
+                  v-model="formData.message"
+                  type="text"
+                  class="contact-form__input"
+                  :placeholder="$t('contact.form.placeholder')"
+                  required
+                >
+              </div>
+              <UiButton
+                type="submit"
+                variant="primary"
+                class="contact-form__submit"
+                :disabled="isLoading"
               >
-                Qayga izoh (majburiy emas)
-              </label>
-              <input
-                id="email"
-                v-model="formData.message"
-                type="text"
-                class="contact-form__input"
-                placeholder="Yozilsin..."
-              >
-            </div>
-            <UiButton
-              variant="primary"
-              class="contact-form__submit"
-            >
-              Yuborish
-            </UiButton>
+                {{ isLoading ? $t('contact.form.submitting') : $t('contact.form.submit') }}
+              </UiButton>
             </div>
           </div>
         </form>
 
-        <div class="contact-divider"></div>
+        <div
+          v-if="errorMessage"
+          class="contact-error"
+        >
+          {{ errorMessage }}
+        </div>
+
+        <div class="contact-divider" />
 
         <div class="contact-info">
           <div class="contact-info__item">
             <div class="contact-info__icon contact-info__icon--location">
-             <IconsLocation/>
+              <IconsLocation />
             </div>
             <div class="contact-info__content">
               <p class="contact-info__label">
-                Manzil
+                {{ $t('contact.info.address') }}
               </p>
-              <p class="contact-info__value">
-                Tashkent, Uzbekistan TSUM,<br>
-                Chimkentskaya 1, office of Jets One Ai
+              <p class="contact-info__value" v-html="$t('contact.info.addressValue')">
               </p>
             </div>
           </div>
 
           <div class="contact-info__item">
             <div class="contact-info__icon contact-info__icon--phone">
-              <IconsPhone/>
+              <IconsPhone />
             </div>
             <div class="contact-info__content">
               <p class="contact-info__label">
-                Bizning kontaktlar
+                {{ $t('contact.info.contacts') }}
               </p>
               <p class="contact-info__value">
                 +998 33 850 22 22
@@ -108,11 +116,11 @@
 
           <div class="contact-info__item">
             <div class="contact-info__icon contact-info__icon--email">
-             <IconsEmail/>
+              <IconsEmail />
             </div>
             <div class="contact-info__content">
               <p class="contact-info__label">
-                Elektron pochta
+                {{ $t('contact.info.email') }}
               </p>
               <p class="contact-info__value">
                 info@jetsoneair.com
@@ -122,24 +130,57 @@
         </div>
       </UiCard>
     </div>
+
+    <ModalsSuccess v-model="showSuccessModal" />
   </section>
 </template>
 
 <script setup lang="ts">
 interface FormData {
   name: string
-  phone: string
+  email: string
   message: string
 }
 
 const formData = ref<FormData>({
   name: '',
-  phone: '',
+  email: '',
   message: '',
 });
 
-function handleSubmit() {
-  console.log('Form submitted:', formData.value);
+const isLoading = ref(false);
+const showSuccessModal = ref(false);
+const errorMessage = ref('');
+
+const config = useRuntimeConfig();
+const { locale, t } = useI18n();
+
+async function handleSubmit() {
+  try {
+    isLoading.value = true;
+    errorMessage.value = '';
+
+    await $fetch(`${config.public.apiBase}/contact/`, {
+      method: 'POST',
+      body: formData.value,
+      params: {
+        lang: locale.value,
+      },
+    });
+
+    formData.value = {
+      name: '',
+      email: '',
+      message: '',
+    };
+
+    showSuccessModal.value = true;
+  } catch (error: any) {
+    console.error('Contact form submission error:', error);
+    errorMessage.value = error?.data?.message || t('contact.error');
+  } finally {
+    isLoading.value = false;
+  }
 }
 </script>
 
@@ -151,7 +192,7 @@ function handleSubmit() {
     padding: 38px;
     margin-bottom: 30px;
   }
-  
+
   &__content {
     padding: 50px;
     @media (max-width: 768px) {
@@ -183,6 +224,17 @@ function handleSubmit() {
     @media (max-width: 768px) {
     font-size: 16px;
   }}
+}
+
+.contact-error {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  color: #ef4444;
+  font-size: 14px;
+  text-align: center;
 }
 
 .contact-form {
@@ -232,6 +284,7 @@ function handleSubmit() {
     background: #040A2480;
     border-radius: 10px;
     width: 100%;
+    color: #fff;
   }
 }
 
@@ -241,7 +294,7 @@ function handleSubmit() {
   border-image-source: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 48.08%, rgba(255, 255, 255, 0) 100%);
   border-image-slice: 1;
   width: 100%;
-  height: 0; 
+  height: 0;
   @media (max-width: 768px) {
     margin: 24px auto;
   }

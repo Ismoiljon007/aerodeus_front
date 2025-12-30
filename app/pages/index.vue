@@ -7,7 +7,10 @@
     <SectionsOurServices :services="services" />
     <SectionsFlights :aircrcraft="aircrcraft" />
     <LazySectionsMap />
-    <SectionsHowWeWork />
+    <SectionsHowWeWork
+      :how-we-work="howWeWork"
+      :how-we-work-steps="howWeWorkSteps"
+    />
     <SectionsAboutUs
       :about="about"
       :statistics="statistics"
@@ -36,6 +39,16 @@ const { data: services } = await useAsyncData(
 const { data: aircrcraft } = await useAsyncData(
   'aircrcraft',
   async () => apiFetch('/aircraft/', { params: { lang: locale.value } }),
+  { watch: [locale] },
+);
+const { data: howWeWork } = await useAsyncData(
+  'howWeWork',
+  async () => apiFetch('/how-we-work/section/', { params: { lang: locale.value } }),
+  { watch: [locale] },
+);
+const { data: howWeWorkSteps } = await useAsyncData(
+  'howWeWorkSteps',
+  async () => apiFetch('/how-we-work/steps/', { params: { lang: locale.value } }),
   { watch: [locale] },
 );
 const { data: statistics } = await useAsyncData(

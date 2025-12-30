@@ -8,18 +8,18 @@
           </button>
 
           <div class="modal-header">
-            <h2 class="modal-title">Ariza qoldirish</h2>
+            <h2 class="modal-title">{{ $t('modal.application.title') }}</h2>
             <p class="modal-subtitle">
-              Arizani tasdiqlash uchun, ism va telefon raqamingizni qoldiring!
+              {{ $t('modal.application.subtitle') }}
             </p>
           </div>
 
           <div class="modal-info">
             <p class="modal-info__title">
-              Samolyot
+              {{ $t('modal.application.aircraft') }}
             </p>
             <p class="modal-info__subtitle">
-              BOMBARDIER CHALLENGER 350
+              {{ $t('modal.application.aircraftName') }}
             </p>
           </div>
 
@@ -27,41 +27,41 @@
 
           <form @submit.prevent="handleSubmit" class="booking-form">
             <div class="form-group">
-              <label for="name" class="form-label">Ism</label>
+              <label for="name" class="form-label">{{ $t('modal.form.name') }}</label>
               <input
                 id="name"
                 v-model="formData.name"
                 type="text"
                 class="form-input"
-                placeholder="Yozing..."
+                :placeholder="$t('modal.form.placeholder')"
                 required
               />
             </div>
 
             <div class="form-group">
-              <label for="phone" class="form-label">Telefon raqam</label>
+              <label for="phone" class="form-label">{{ $t('modal.form.phone') }}</label>
               <input
                 id="phone"
                 v-model="formData.phone"
                 type="tel"
                 class="form-input"
-                placeholder="Yozing..."
+                :placeholder="$t('modal.form.placeholder')"
                 required
               />
             </div>
 
             <div class="form-group">
-              <label for="note" class="form-label">Qisqa izoh (majburiy emas)</label>
+              <label for="note" class="form-label">{{ $t('modal.form.note') }}</label>
               <textarea
                 id="note"
                 v-model="formData.note"
                 class="form-input form-textarea"
-                placeholder="Yozing..."
+                :placeholder="$t('modal.form.placeholder')"
                 rows="3"
               />
             </div>
 
-            <UiButton type="submit">Yuborish</UiButton>
+            <UiButton type="submit">{{ $t('modal.form.submit') }}</UiButton>
           </form>
         </div>
       </div>

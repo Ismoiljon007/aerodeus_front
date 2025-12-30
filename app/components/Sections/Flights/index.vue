@@ -2,11 +2,10 @@
   <div class="flights">
     <div class="flights__header">
       <h2 class="flights__title">
-        Eng ko'p tanlanadigan samolyotlar
+        {{ $t('sections.flights.title') }}
       </h2>
       <p class="flights__description">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem ipsum has been the
+        {{ $t('sections.flights.subtitle') }}
       </p>
     </div>
 
@@ -109,7 +108,7 @@
               </ul>
 
               <UiButton :variant="isActive ? 'primary' : 'secondary'">
-                Ariza yuborish
+                {{ $t('sections.flights.submitApplication') }}
               </UiButton>
             </div>
           </article>
@@ -120,7 +119,7 @@
         v-else
         class="flights__empty"
       >
-        <p>Hozircha ma'lumot yo'q</p>
+        <p>{{ $t('sections.flights.noData') }}</p>
       </div>
 
       <div
@@ -194,6 +193,7 @@ function onSlideChange(swiper: SwiperType) {
 <style lang="scss" scoped>
 .flights {
   margin: 80px 0;
+  overflow: hidden;
 
   @media (max-width: 768px) {
     margin: 40px 0;

@@ -1,0 +1,106 @@
+{
+  "contact": {
+    "title": "Свяжитесь с нами",
+    "subtitle": "Оставьте свои данные, и мы свяжемся с вами как можно скорее",
+    "form": {
+      "name": "Имя",
+      "email": "Эл. почта",
+      "message": "Сообщение",
+      "phone": "Номер телефона",
+      "placeholder": "Введите...",
+      "submit": "Отправить",
+      "submitting": "Отправка..."
+    },
+    "info": {
+      "address": "Адрес",
+      "addressValue": "Ташкент, Узбекистан TSUM,Chimkentskaya 1, офис Jets One Ai",
+      "contacts": "Наши контакты",
+      "email": "Эл. почта"
+    },
+    "error": "Произошла ошибка. Пожалуйста, попробуйте снова."
+  },
+  "booking": {
+    "title": "Выберите направление",
+    "oneWay": "Туда",
+    "roundTrip": "Туда-Обратно",
+    "from": "Откуда",
+    "to": "Куда",
+    "date": "Дата и время вылета",
+    "passengers": "Количество пассажиров",
+    "passengersCount": "{count} человек",
+    "select": "Выберите",
+    "locations": {
+      "tashkent": "Ташкент",
+      "samarkand": "Самарканд",
+      "bukhara": "Бухара",
+      "fergana": "Фергана",
+      "andijan": "Андижан",
+      "navoi": "Навои",
+      "urgench": "Ургенч",
+      "nukus": "Нукус"
+    }
+  },
+  "modal": {
+    "booking": {
+      "title": "Забронировать",
+      "subtitle": "Для подтверждения бронирования оставьте ваше имя и номер телефона!",
+      "departure": "Вылет",
+      "arrival": "Прилет",
+      "departureLocation": "Узбекистан, Ташкент",
+      "arrivalLocation": "Казахстан, Алматы"
+    },
+    "application": {
+      "title": "Оставить заявку",
+      "subtitle": "Для подтверждения заявки оставьте ваше имя и номер телефона!",
+      "aircraft": "Самолет",
+      "aircraftName": "BOMBARDIER CHALLENGER 350"
+    },
+    "success": {
+      "title": "Успешно отправлено!",
+      "subtitle": "Наши менеджеры скоро свяжутся с вами. Спасибо",
+      "button": "Понятно"
+    },
+    "form": {
+      "name": "Имя",
+      "phone": "Номер телефона",
+      "note": "Краткий комментарий (необязательно)",
+      "placeholder": "Введите...",
+      "submit": "Отправить"
+    }
+  },
+  "navbar": {
+    "services": "Наши услуги",
+    "advantages": "Наши преимущества",
+    "fleet": "Флот",
+    "howWeWork": "Как мы работаем?",
+    "contactUs": "Связаться с нами"
+  },
+  "sections": {
+    "ourServices": {
+      "title": "Наши услуги",
+      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the"
+    },
+    "benefits": {
+      "title": "Преимущества Aerodeus"
+    },
+    "howWeWork": {
+      "title": "Как мы работаем?",
+      "subtitle": "4 шага до вашего полета"
+    },
+    "flights": {
+      "title": "Самые популярные самолеты",
+      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the",
+      "submitApplication": "Подать заявку",
+      "noData": "Пока нет данных"
+    }
+  },
+  "footer": {
+    "copyright": "{year} © Aerodeus of flights on private VIP class aircrafts"
+  },
+  "common": {
+    "error": "Произошла ошибка",
+    "success": "Успешно",
+    "loading": "Загрузка...",
+    "close": "Закрыть"
+  }
+}

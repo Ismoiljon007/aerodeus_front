@@ -7,7 +7,7 @@
       >
         <div class="booking_card-header">
           <p class="booking_title">
-            Yo'nalishni tanlang
+            {{ $t('booking.title') }}
           </p>
           <div class="booking_card-btns">
             <UiButton
@@ -15,14 +15,14 @@
               :class="{ active: tripType === 'one_way' }"
               @click="tripType = 'one_way'"
             >
-              Faqat borish
+              {{ $t('booking.oneWay') }}
             </UiButton>
             <UiButton
               variant="secondary"
               :class="{ active: tripType === 'round_trip' }"
               @click="tripType = 'round_trip'"
             >
-              Borish-Kelish
+              {{ $t('booking.roundTrip') }}
             </UiButton>
           </div>
         </div>
@@ -32,13 +32,13 @@
               class="booking_field-text"
               @click="toggleFromSelect"
             >
-              <span class="booking_field-label">Borish manzili</span>
+              <span class="booking_field-label">{{ $t('booking.from') }}</span>
               <div
                 class="booking_select-trigger"
                 :class="{ open: isFromOpen }"
               >
                 <span class="booking_select-value">
-                  {{ fromLocation || 'Tanlang' }}
+                  {{ fromLocation || $t('booking.select') }}
                 </span>
               </div>
             </button>
@@ -72,14 +72,14 @@
               >
                 <li
                   v-for="location in locations"
-                  :key="`from-${location}`"
+                  :key="`from-${location.key}`"
                 >
                   <button
                     type="button"
                     class="booking_select-option"
-                    @click="selectFromLocation(location)"
+                    @click="selectFromLocation(location.name)"
                   >
-                    {{ location }}
+                    {{ location.name }}
                   </button>
                 </li>
               </ul>
@@ -90,14 +90,14 @@
               class="booking_field-text"
               @click="toggleToSelect"
             >
-              <span class="booking_field-label">Kelish manzili</span>
+              <span class="booking_field-label">{{ $t('booking.to') }}</span>
               <div
                 type="button"
                 class="booking_select-trigger"
                 :class="{ open: isToOpen }"
               >
                 <span class="booking_select-value">
-                  {{ toLocation || 'Tanlang' }}
+                  {{ toLocation || $t('booking.select') }}
                 </span>
               </div>
             </button>
@@ -131,14 +131,14 @@
               >
                 <li
                   v-for="location in locations"
-                  :key="`to-${location}`"
+                  :key="`to-${location.key}`"
                 >
                   <button
                     type="button"
                     class="booking_select-option"
-                    @click="selectToLocation(location)"
+                    @click="selectToLocation(location.name)"
                   >
-                    {{ location }}
+                    {{ location.name }}
                   </button>
                 </li>
               </ul>
@@ -149,7 +149,7 @@
             type="button"
           >
             <span class="booking_field-text">
-              <span class="booking_field-label">Uchish kun va soati</span>
+              <span class="booking_field-label">{{ $t('booking.date') }}</span>
               <input type="date">
             </span>
           </label>
@@ -157,8 +157,8 @@
           <!-- Counter qilingan Odam soni maydoni -->
           <div class="booking_field booking_field-counter">
             <span class="booking_field-text">
-              <span class="booking_field-label">Odam soni</span>
-              <span class="booking_field-value">{{ passengerCount }} kishi</span>
+              <span class="booking_field-label">{{ $t('booking.passengers') }}</span>
+              <span class="booking_field-value">{{ $t('booking.passengersCount', { count: passengerCount }) }}</span>
             </span>
             <div class="booking_counter">
               <button
@@ -222,20 +222,28 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 type TripType = 'one_way' | 'round_trip'
 
+const { t } = useI18n();
+
 const tripType = ref<TripType>('one_way');
 const passengerCount = ref<number>(1);
 const cardRef = ref<HTMLElement | null>(null);
 let bookingContext: gsap.Context | null = null;
-const locations = [
-  'Toshkent',
-  'Samarqand',
-  'Buxoro',
-  'Farg\'ona',
-  'Andijon',
-  'Navoiy',
-  'Urganch',
-  'Nukus',
+const locationKeys = [
+  'tashkent',
+  'samarkand',
+  'bukhara',
+  'fergana',
+  'andijan',
+  'navoi',
+  'urgench',
+  'nukus',
 ];
+const locations = computed(() =>
+  locationKeys.map(key => ({
+    key,
+    name: t(`booking.locations.${key}`),
+  })),
+);
 const fromLocation = ref<string>('');
 const toLocation = ref<string>('');
 

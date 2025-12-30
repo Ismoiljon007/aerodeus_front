@@ -29,22 +29,22 @@
       <ul>
         <li>
           <NuxtLink :to="localePath('/')">
-            Bizning xizmatlar
+            {{ $t('navbar.services') }}
           </NuxtLink>
         </li>
         <li>
           <NuxtLink :to="localePath('/')">
-            Bizning Afzalliklar
+            {{ $t('navbar.advantages') }}
           </NuxtLink>
         </li>
         <li>
           <NuxtLink :to="localePath('/')">
-            Flot
+            {{ $t('navbar.fleet') }}
           </NuxtLink>
         </li>
         <li>
           <NuxtLink :to="localePath('/')">
-            Biz qanday ishlaymiz?
+            {{ $t('navbar.howWeWork') }}
           </NuxtLink>
         </li>
       </ul>
@@ -53,7 +53,7 @@
       variant="secondary"
       class="menu_button"
     >
-      Biz bilan aloqa
+      {{ $t('navbar.contactUs') }}
     </UiButton>
   </div>
 </template>

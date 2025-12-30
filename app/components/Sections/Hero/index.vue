@@ -13,14 +13,20 @@
     />
     <div class="container">
       <div class="hero_content">
-        <h2 class="hero_title" ref="titleRef">
+        <h2
+          ref="titleRef"
+          class="hero_title"
+        >
           {{ hero?.data?.title || 'Oliy darajadagi xizmat' }}
         </h2>
-        <p class="hero_desc" ref="descRef">
+        <p
+          ref="descRef"
+          class="hero_desc"
+        >
           {{ hero?.data?.subtitle || 'Premium xususiy samolyotlar bilan mutlaq qulaylik va nufuz' }}
         </p>
         <UiButton class="hero_button">
-          Bizning servislar
+          {{ $t('navbar.services') }}
         </UiButton>
       </div>
       <NuxtImg

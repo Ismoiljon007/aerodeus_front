@@ -1,22 +1,26 @@
+<template>
+  <div class="how-we-work">
+    <div class="container">
+      <div class="how-we-work-wrapper">
+        <div class="how-we-wrok-text-wrapper">
+          <h2>{{ howWeWork?.data?.title || $t('sections.howWeWork.title') }}</h2>
+          <span>{{ howWeWork?.data?.subtitle || $t('sections.howWeWork.subtitle') }}</span>
+        </div>
+
+        <HowWeWorkCards :steps="howWeWorkSteps" />
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import HowWeWorkCards from './howWeWorkCards.vue';
 
+defineProps<{
+  howWeWork?: any
+  howWeWorkSteps?: any[]
+}>();
 </script>
-
-<template>
-    <div class="how-we-work">
-        <div class="container">
-            <div class="how-we-work-wrapper">
-                <div class="how-we-wrok-text-wrapper">
-                    <h2>Biz qanday ishlaymiz?</h2>
-                    <span>Parvozingizga 4 qadam</span>
-                </div>
-
-                <HowWeWorkCards />
-            </div>
-        </div>
-    </div>
-</template>
 
 <style scoped lang="scss">
 .how-we-work {

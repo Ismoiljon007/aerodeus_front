@@ -6,10 +6,10 @@
     <div class="container">
       <div class="our-services-wrapper">
         <h2 class="our-services-wrapper__title">
-          Bizning xizmatlarimiz
+          {{ $t('sections.ourServices.title') }}
         </h2>
         <p class="our-services-wrapper__sub-title">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          {{ $t('sections.ourServices.subtitle') }}
         </p>
 
         <div class="services-list">
@@ -37,10 +37,10 @@
 </template>
 
 <script setup lang="ts">
-import OurServicesPhotos from './ourServicesPhotos.vue';
-import OurServicestexts from './ourServicestexts.vue';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import OurServicesPhotos from './ourServicesPhotos.vue';
+import OurServicestexts from './ourServicestexts.vue';
 
 const props = defineProps<{ services?: any }>();
 
@@ -48,14 +48,16 @@ const servicesRef = ref<HTMLElement | null>(null);
 let servicesContext: gsap.Context | null = null;
 const servicesList = computed(() => {
   const items = props.services?.data;
-  if (!Array.isArray(items)) return [];
+  if (!Array.isArray(items))
+    return [];
   return [...items].slice().sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 });
 
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
   const sectionEl = servicesRef.value;
-  if (!sectionEl) return;
+  if (!sectionEl)
+    return;
 
   servicesContext = gsap.context(() => {
     const q = gsap.utils.selector(sectionEl);

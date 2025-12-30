@@ -1,0 +1,106 @@
+{
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Leave your information and we will contact you as soon as possible",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "phone": "Phone Number",
+      "placeholder": "Enter...",
+      "submit": "Submit",
+      "submitting": "Submitting..."
+    },
+    "info": {
+      "address": "Address",
+      "addressValue": "Tashkent, Uzbekistan TSUM,Chimkentskaya 1, office of Jets One Ai",
+      "contacts": "Our Contacts",
+      "email": "Email"
+    },
+    "error": "An error occurred. Please try again."
+  },
+  "booking": {
+    "title": "Choose Direction",
+    "oneWay": "One Way",
+    "roundTrip": "Round Trip",
+    "from": "Departure",
+    "to": "Destination",
+    "date": "Flight Date and Time",
+    "passengers": "Passengers",
+    "passengersCount": "{count} person | {count} people",
+    "select": "Select",
+    "locations": {
+      "tashkent": "Tashkent",
+      "samarkand": "Samarkand",
+      "bukhara": "Bukhara",
+      "fergana": "Fergana",
+      "andijan": "Andijan",
+      "navoi": "Navoi",
+      "urgench": "Urgench",
+      "nukus": "Nukus"
+    }
+  },
+  "modal": {
+    "booking": {
+      "title": "Book Now",
+      "subtitle": "To confirm your booking, please leave your name and phone number!",
+      "departure": "Departure",
+      "arrival": "Arrival",
+      "departureLocation": "Uzbekistan, Tashkent",
+      "arrivalLocation": "Kazakhstan, Almaty"
+    },
+    "application": {
+      "title": "Submit Application",
+      "subtitle": "To confirm your application, please leave your name and phone number!",
+      "aircraft": "Aircraft",
+      "aircraftName": "BOMBARDIER CHALLENGER 350"
+    },
+    "success": {
+      "title": "Successfully Submitted!",
+      "subtitle": "Our managers will contact you shortly. Thank you",
+      "button": "OK"
+    },
+    "form": {
+      "name": "Name",
+      "phone": "Phone Number",
+      "note": "Short Note (optional)",
+      "placeholder": "Enter...",
+      "submit": "Submit"
+    }
+  },
+  "navbar": {
+    "services": "Our Services",
+    "advantages": "Our Advantages",
+    "fleet": "Fleet",
+    "howWeWork": "How We Work?",
+    "contactUs": "Contact Us"
+  },
+  "sections": {
+    "ourServices": {
+      "title": "Our Services",
+      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the"
+    },
+    "benefits": {
+      "title": "Aerodeus Advantages"
+    },
+    "howWeWork": {
+      "title": "How We Work?",
+      "subtitle": "4 Steps to Your Flight"
+    },
+    "flights": {
+      "title": "Most Popular Aircrafts",
+      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the",
+      "submitApplication": "Submit Application",
+      "noData": "No data available yet"
+    }
+  },
+  "footer": {
+    "copyright": "{year} © Aerodeus of flights on private VIP class aircrafts"
+  },
+  "common": {
+    "error": "An error occurred",
+    "success": "Success",
+    "loading": "Loading...",
+    "close": "Close"
+  }
+}

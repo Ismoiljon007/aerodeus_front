@@ -22,10 +22,12 @@ export default defineNuxtConfig({
   modules: ['@nuxt/image', '@nuxt/eslint', '@nuxtjs/i18n'],
   i18n: {
     locales: [
-      { code: 'en', name: 'En' },
-      { code: 'ru', name: 'Ru' },
-      { code: 'uz', name: 'Uz' },
+      { code: 'en', name: 'En', file: 'en.json' },
+      { code: 'ru', name: 'Ru', file: 'ru.json' },
+      { code: 'uz', name: 'Uz', file: 'uz.json' },
     ],
-    defaultLocale: 'en',
+    defaultLocale: 'uz',
+    langDir: './locales/',
+    strategy: 'no_prefix',
   },
 });

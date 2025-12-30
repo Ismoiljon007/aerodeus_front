@@ -6,12 +6,12 @@
           <div class="modal-success__icon">
             <IconsSuccess />
           </div>
-          <h1 class="modal-success__title">Muvaffaqiyatli yuborildi!</h1>
+          <h1 class="modal-success__title">{{ $t('modal.success.title') }}</h1>
           <p class="modal-success__subtitle">
-            Bizning menedjerlar tez orqada siz bilan aloqaga chiqishadi. Rahmat
+            {{ $t('modal.success.subtitle') }}
           </p>
           <div class="modal-success__btn">
-            <UiButton @click="closeModal">Tushunarli</UiButton>
+            <UiButton @click="closeModal">{{ $t('modal.success.button') }}</UiButton>
           </div>
         </div>
       </div>

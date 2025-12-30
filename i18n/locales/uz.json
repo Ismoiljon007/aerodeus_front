@@ -1,0 +1,106 @@
+{
+  "contact": {
+    "title": "Biz bilan aloqa",
+    "subtitle": "Ma'lumotlarni qoldiring va biz imkon qadar tezroq siz bilan bog'lanamiz",
+    "form": {
+      "name": "Ism",
+      "email": "Email",
+      "message": "Xabar",
+      "phone": "Telefon raqam",
+      "placeholder": "Yozilsin...",
+      "submit": "Yuborish",
+      "submitting": "Yuborilmoqda..."
+    },
+    "info": {
+      "address": "Manzil",
+      "addressValue": "Tashkent, Uzbekistan TSUM,Chimkentskaya 1, office of Jets One Ai",
+      "contacts": "Bizning kontaktlar",
+      "email": "Elektron pochta"
+    },
+    "error": "Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring."
+  },
+  "booking": {
+    "title": "Yo'nalishni tanlang",
+    "oneWay": "Faqat borish",
+    "roundTrip": "Borish-Kelish",
+    "from": "Borish manzili",
+    "to": "Kelish manzili",
+    "date": "Uchish kun va soati",
+    "passengers": "Odam soni",
+    "passengersCount": "{count} kishi",
+    "select": "Tanlang",
+    "locations": {
+      "tashkent": "Toshkent",
+      "samarkand": "Samarqand",
+      "bukhara": "Buxoro",
+      "fergana": "Farg'ona",
+      "andijan": "Andijon",
+      "navoi": "Navoiy",
+      "urgench": "Urganch",
+      "nukus": "Nukus"
+    }
+  },
+  "modal": {
+    "booking": {
+      "title": "Bron qilish",
+      "subtitle": "Bronni tasdiqlash uchun, ism va telefon raqamingizni qoldiring!",
+      "departure": "Ketish",
+      "arrival": "Borish",
+      "departureLocation": "O'zbekiston, Toshkent",
+      "arrivalLocation": "Qozoq'iston, Almaty"
+    },
+    "application": {
+      "title": "Ariza qoldirish",
+      "subtitle": "Arizani tasdiqlash uchun, ism va telefon raqamingizni qoldiring!",
+      "aircraft": "Samolyot",
+      "aircraftName": "BOMBARDIER CHALLENGER 350"
+    },
+    "success": {
+      "title": "Muvaffaqiyatli yuborildi!",
+      "subtitle": "Bizning menedjerlar tez orqada siz bilan aloqaga chiqishadi. Rahmat",
+      "button": "Tushunarli"
+    },
+    "form": {
+      "name": "Ism",
+      "phone": "Telefon raqam",
+      "note": "Qisqa izoh (majburiy emas)",
+      "placeholder": "Yozing...",
+      "submit": "Yuborish"
+    }
+  },
+  "navbar": {
+    "services": "Bizning xizmatlar",
+    "advantages": "Bizning afzalliklar",
+    "fleet": "Flot",
+    "howWeWork": "Biz qanday ishlaymiz?",
+    "contactUs": "Biz bilan aloqa"
+  },
+  "sections": {
+    "ourServices": {
+      "title": "Bizning xizmatlarimiz",
+      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the"
+    },
+    "benefits": {
+      "title": "Aerodeus afzalliklari"
+    },
+    "howWeWork": {
+      "title": "Biz qanday ishlaymiz?",
+      "subtitle": "Parvozingizga 4 qadam"
+    },
+    "flights": {
+      "title": "Eng ko'p tanlanadigan samolyotlar",
+      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the",
+      "submitApplication": "Ariza yuborish",
+      "noData": "Hozircha ma'lumot yo'q"
+    }
+  },
+  "footer": {
+    "copyright": "{year} © Aerodeus of flights on private VIP class aircrafts"
+  },
+  "common": {
+    "error": "Xatolik yuz berdi",
+    "success": "Muvaffaqiyatli",
+    "loading": "Yuklanmoqda...",
+    "close": "Yopish"
+  }
+}

@@ -20,79 +20,54 @@
       />
     </svg>
 
-    <div class="how-we-work-card">
+    <div
+      v-for="(step, index) in sortedSteps"
+      :key="step.id"
+      class="how-we-work-card"
+    >
       <div
-        :ref="(el) => setIconRef(el as HTMLElement, 0)"
+        :ref="(el) => setIconRef(el as HTMLElement, index)"
         class="hww-icon"
       >
         <svg
           height="28"
           width="28"
         >
-          <use xlink:href="/sprite.svg#i-calendar" />
+          <use :xlink:href="`/sprite.svg#${step.icon || defaultIcons[index] || 'i-calendar'}`" />
         </svg>
       </div>
-      <h3>Parvozni bron qiling</h3>
-      <p>Veb-sayt, telefon yoki messenjer orqali biz bilan bog'laning.</p>
-    </div>
-
-    <div class="how-we-work-card">
-      <div
-        :ref="(el) => setIconRef(el as HTMLElement, 1)"
-        class="hww-icon"
-      >
-        <svg
-          height="28"
-          width="28"
-        >
-          <use xlink:href="/sprite.svg#i-pilot" />
-        </svg>
-      </div>
-      <h3>Parvozni bron qiling</h3>
-      <p>Veb-sayt, telefon yoki messenjer orqali biz bilan bog'laning.</p>
-    </div>
-
-    <div class="how-we-work-card">
-      <div
-        :ref="(el) => setIconRef(el as HTMLElement, 2)"
-        class="hww-icon"
-      >
-        <svg
-          height="28"
-          width="28"
-        >
-          <use xlink:href="/sprite.svg#i-check" />
-        </svg>
-      </div>
-      <h3>Parvozni bron qiling</h3>
-      <p>Veb-sayt, telefon yoki messenjer orqali biz bilan bog'laning.</p>
-    </div>
-
-    <div class="how-we-work-card">
-      <div
-        :ref="(el) => setIconRef(el as HTMLElement, 3)"
-        class="hww-icon"
-      >
-        <svg
-          height="28"
-          width="28"
-        >
-          <use xlink:href="/sprite.svg#i-samalet" />
-        </svg>
-      </div>
-      <h3>Parvozni bron qiling</h3>
-      <p>Veb-sayt, telefon yoki messenjer orqali biz bilan bog'laning.</p>
+      <h3>{{ step.title }}</h3>
+      <p>{{ step.description }}</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 
 interface Pt {
   x: number
   y: number
 }
+
+const props = defineProps<{
+  steps?: any
+}>();
+
+// Default icons for each step
+const defaultIcons = [
+  'i-calendar',
+  'i-pilot',
+  'i-check',
+  'i-samalet',
+];
+
+const sortedSteps = computed(() => {
+  const data = props.steps?.data || [];
+  if (!Array.isArray(data))
+    return [];
+  return [...data].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+});
 
 const wrapperRef = ref<HTMLElement | null>(null);
 const svgRef = ref<SVGSVGElement | null>(null);

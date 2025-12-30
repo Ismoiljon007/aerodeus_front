@@ -5,7 +5,7 @@
   >
     <div class="container">
       <h2 class="benefits_title">
-        Aerodeus Afzalliklari
+        {{ $t('sections.benefits.title') }}
       </h2>
       <div class="benefits-wrapper">
         <BenefitsCards :items="advantages?.data" />

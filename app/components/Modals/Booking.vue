@@ -1,16 +1,28 @@
 <template>
   <Teleport to="body">
     <Transition name="modal">
-      <div v-if="modelValue" class="modal-overlay" @click="closeModal">
-        <div class="booking-modal" @click.stop>
-          <button class="close-btn" @click="closeModal">
+      <div
+        v-if="modelValue"
+        class="modal-overlay"
+        @click="closeModal"
+      >
+        <div
+          class="booking-modal"
+          @click.stop
+        >
+          <button
+            class="close-btn"
+            @click="closeModal"
+          >
             <IconsClose />
           </button>
 
           <div class="modal-header">
-            <h2 class="modal-title">Bron qilish</h2>
+            <h2 class="modal-title">
+              {{ $t('modal.booking.title') }}
+            </h2>
             <p class="modal-subtitle">
-              Bronni tasdiqlash uchun, ism va telefon raqamingizni qoldiring!
+              {{ $t('modal.booking.subtitle') }}
             </p>
           </div>
 
@@ -18,10 +30,10 @@
             <div class="route-item">
               <div class="route-icon">
                 <IconsPilot1 />
-                <span class="route-label">Ketish</span>
+                <span class="route-label">{{ $t('modal.booking.departure') }}</span>
               </div>
               <div class="route-details">
-                <span class="route-location">O'zbekiston, Toshkent</span>
+                <span class="route-location">{{ $t('modal.booking.departureLocation') }}</span>
               </div>
             </div>
 
@@ -32,53 +44,67 @@
             <div class="route-item">
               <div class="route-icon">
                 <IconsPilot2 />
-                <span class="route-label">Borish</span>
+                <span class="route-label">{{ $t('modal.booking.arrival') }}</span>
               </div>
               <div class="route-details">
-                <span class="route-location">Qozoq'iston, Almaty</span>
+                <span class="route-location">{{ $t('modal.booking.arrivalLocation') }}</span>
               </div>
             </div>
           </div>
 
-          <div class="divider"></div>
+          <div class="divider" />
 
-          <form @submit.prevent="handleSubmit" class="booking-form">
+          <form
+            class="booking-form"
+            @submit.prevent="handleSubmit"
+          >
             <div class="form-group">
-              <label for="name" class="form-label">Ism</label>
+              <label
+                for="name"
+                class="form-label"
+              >{{ $t('modal.form.name') }}</label>
               <input
                 id="name"
                 v-model="formData.name"
                 type="text"
                 class="form-input"
-                placeholder="Yozing..."
+                :placeholder="$t('modal.form.placeholder')"
                 required
-              />
+              >
             </div>
 
             <div class="form-group">
-              <label for="phone" class="form-label">Telefon raqam</label>
+              <label
+                for="phone"
+                class="form-label"
+              >{{ $t('modal.form.phone') }}</label>
               <input
                 id="phone"
                 v-model="formData.phone"
                 type="tel"
                 class="form-input"
-                placeholder="Yozing..."
+                :placeholder="$t('modal.form.placeholder')"
                 required
-              />
+              >
             </div>
 
             <div class="form-group">
-              <label for="note" class="form-label">Qisqa izoh (majburiy emas)</label>
+              <label
+                for="note"
+                class="form-label"
+              >{{ $t('modal.form.note') }}</label>
               <textarea
                 id="note"
                 v-model="formData.note"
                 class="form-input form-textarea"
-                placeholder="Yozing..."
+                :placeholder="$t('modal.form.placeholder')"
                 rows="3"
               />
             </div>
 
-            <UiButton type="submit">Yuborish</UiButton>
+            <UiButton type="submit">
+              {{ $t('modal.form.submit') }}
+            </UiButton>
           </form>
         </div>
       </div>
@@ -102,22 +128,22 @@ interface Emits {
   (e: 'submit', data: FormData): void
 }
 
-const props = defineProps<Props>()
-const emit = defineEmits<Emits>()
+const props = defineProps<Props>();
+const emit = defineEmits<Emits>();
 
 const formData = ref<FormData>({
   name: '',
   phone: '',
-  note: ''
-})
+  note: '',
+});
 
-const closeModal = () => {
-  emit('update:modelValue', false)
+function closeModal() {
+  emit('update:modelValue', false);
 }
 
-const handleSubmit = async () => {
-  emit('submit', formData.value)
-  closeModal()
+async function handleSubmit() {
+  emit('submit', formData.value);
+  closeModal();
 }
 </script>
 
@@ -318,6 +344,6 @@ const handleSubmit = async () => {
   border-image-source: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 48.08%, rgba(255, 255, 255, 0) 100%);
   border-image-slice: 1;
   width: 100%;
-  height: 0; 
+  height: 0;
 }
 </style>
