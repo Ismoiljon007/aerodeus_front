@@ -22,29 +22,15 @@
 <script setup lang="ts">
 const { locale } = useI18n();
 
-// Parallel API calls - all run at the same time instead of sequentially
-// This significantly reduces TTFB while keeping SSR for SEO
-const [
-  { data: hero },
-  { data: partners },
-  { data: advantages },
-  { data: services },
-  { data: aircrcraft },
-  { data: howWeWork },
-  { data: howWeWorkSteps },
-  { data: statistics },
-  { data: about },
-] = await Promise.all([
-  useAsyncData('hero', () => apiFetch('/hero/', { params: { lang: locale.value } }), { watch: [locale] }),
-  useAsyncData('partners', () => apiFetch('/partners/', { params: { lang: locale.value } }), { watch: [locale] }),
-  useAsyncData('advantages', () => apiFetch('/advantages/', { params: { lang: locale.value } }), { watch: [locale] }),
-  useAsyncData('services', () => apiFetch('/services/with-features/', { params: { lang: locale.value } }), { watch: [locale] }),
-  useAsyncData('aircrcraft', () => apiFetch('/aircraft/', { params: { lang: locale.value } }), { watch: [locale] }),
-  useAsyncData('howWeWork', () => apiFetch('/how-we-work/section/', { params: { lang: locale.value } }), { watch: [locale] }),
-  useAsyncData('howWeWorkSteps', () => apiFetch('/how-we-work/steps/', { params: { lang: locale.value } }), { watch: [locale] }),
-  useAsyncData('statistics', () => apiFetch('/statistics/', { params: { lang: locale.value } }), { watch: [locale] }),
-  useAsyncData('about', () => apiFetch('/about/', { params: { lang: locale.value } }), { watch: [locale] }),
-]);
+const { data: hero } = await useAsyncData('hero', () => apiFetch('/hero/', { params: { lang: locale.value } }), { watch: [locale] });
+const { data: partners } = await useAsyncData('partners', () => apiFetch('/partners/', { params: { lang: locale.value } }), { watch: [locale] });
+const { data: advantages } = await useAsyncData('advantages', () => apiFetch('/advantages/', { params: { lang: locale.value } }), { watch: [locale] });
+const { data: services } = await useAsyncData('services', () => apiFetch('/services/with-features/', { params: { lang: locale.value } }), { watch: [locale] });
+const { data: aircrcraft } = await useAsyncData('aircrcraft', () => apiFetch('/aircraft/', { params: { lang: locale.value } }), { watch: [locale] });
+const { data: howWeWork } = await useAsyncData('howWeWork', () => apiFetch('/how-we-work/section/', { params: { lang: locale.value } }), { watch: [locale] });
+const { data: howWeWorkSteps } = await useAsyncData('howWeWorkSteps', () => apiFetch('/how-we-work/steps/', { params: { lang: locale.value } }), { watch: [locale] });
+const { data: statistics } = await useAsyncData('statistics', () => apiFetch('/statistics/', { params: { lang: locale.value } }), { watch: [locale] });
+const { data: about } = await useAsyncData('about', () => apiFetch('/about/', { params: { lang: locale.value } }), { watch: [locale] });
 </script>
 
 <style scoped>
