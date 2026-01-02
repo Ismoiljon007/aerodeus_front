@@ -4,11 +4,17 @@
       ref="aboutLeftRef"
       class="about-us-left-img-and-cards"
     >
-      <img
+      <NuxtImg
         class="about-us-main-img"
         :src="mainImage"
         :alt="mainImageAlt"
-      >
+        width="534"
+        height="709"
+        loading="lazy"
+        format="webp"
+        quality="80"
+        sizes="(max-width: 885px) 100vw, 407px"
+      />
       <div class="about-us-cards-wrapper">
         <span
           ref="lineRef"

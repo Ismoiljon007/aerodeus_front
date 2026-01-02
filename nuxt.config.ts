@@ -93,6 +93,15 @@ export default defineNuxtConfig({
   image: {
     quality: 80,
     format: ['webp', 'jpg'],
+    domains: ['aerodeus.fargenius.uz'],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
+    },
   },
 
   i18n: {

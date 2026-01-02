@@ -4,6 +4,16 @@
     ref="benefitsRef"
     class="benefits"
   >
+    <NuxtPicture
+      src="/images/jpg/benBg.jpg"
+      format="webp"
+      quality="80"
+      loading="lazy"
+      width="100%"
+      height="100%"
+      :picture-attrs="{ class: 'benefits__bg-picture' }"
+      :img-attrs="{ class: 'benefits__bg-img', alt: '' }"
+    />
     <div class="container">
       <h2 class="benefits_title">
         {{ $t('sections.benefits.title') }}
@@ -71,9 +81,10 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 .benefits {
     position: relative;
-    background-image: url('/images/jpg/benBg.jpg');
     padding: 9rem 0 13rem;
     margin-bottom: 5rem;
+    overflow: hidden;
+
     &::before {
         content: "";
         position: absolute;
@@ -82,17 +93,39 @@ onBeforeUnmount(() => {
         width: 100%;
         height: 14rem;
         display: block;
-       background: linear-gradient(0deg, #0E1530 0%, rgba(14, 21, 48, 0) 100%);
+        background: linear-gradient(0deg, #0E1530 0%, rgba(14, 21, 48, 0) 100%);
+        z-index: 1;
     }
+
+    .container {
+        position: relative;
+        z-index: 1;
+    }
+
     .benefits-wrapper {
         display: flex;
         flex-direction: column;
         gap: 5rem;
     }
+
     h2 {
       @include heading-1;
       margin-bottom: 4rem;
       text-align: center;
     }
+}
+
+:deep(.benefits__bg-picture) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+:deep(.benefits__bg-img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>

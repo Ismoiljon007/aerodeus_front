@@ -9,7 +9,7 @@
       width="100%"
       height="890"
       :picture-attrs="{ class: 'hero__picture' }"
-      :img-attrs="{ class: 'hero__img', alt: '' }"
+      :img-attrs="{ class: 'hero__img', alt: '', fetchpriority: 'high' }"
     />
     <div class="container">
       <div class="hero_content">

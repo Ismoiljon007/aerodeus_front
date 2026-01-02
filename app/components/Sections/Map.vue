@@ -37,6 +37,7 @@
             v-for="route in routePaths"
             :key="route.key"
             :d="route.d"
+            :style="{ strokeWidth: `${route.strokeWidth}px` }"
             class="map__route"
           />
         </svg>
@@ -195,8 +196,14 @@ const PIN_SCALE = {
   fallback: 1,
 };
 
+// Seeded random function for consistent stroke widths
+function seededRandom(seed: number) {
+  const x = Math.sin(seed * 9999) * 10000;
+  return x - Math.floor(x);
+}
+
 const routePaths = computed(() => {
-  const paths: Array<{ key: string, d: string }> = [];
+  const paths: Array<{ key: string, d: string, strokeWidth: number }> = [];
   for (const row of routes.value) {
     const start = cityToPoint(row.from_city);
     const end = cityToPoint(row.to_city);
@@ -209,9 +216,13 @@ const routePaths = computed(() => {
     const cx = mx;
     const cy = my - bend;
 
+    // Random stroke width between 1.5 and 3.5 based on route id
+    const strokeWidth = 1.5 + seededRandom(row.id) * 2;
+
     paths.push({
       key: `route-${row.id}`,
       d: `M ${start.x} ${start.y} Q ${cx} ${cy} ${end.x} ${end.y}`,
+      strokeWidth,
     });
   }
   return paths;
@@ -257,11 +268,38 @@ function svgToClient(x: number, y: number) {
   if (!width || !height) {
     return { left: 0, top: 0 };
   }
-  const scaleX = width / GEO.width;
-  const scaleY = height / GEO.height;
+
+  // SVG uses preserveAspectRatio="xMidYMid meet", so we need to calculate
+  // the actual rendered size and offset of the SVG content
+  const wrapAspect = width / height;
+  const svgAspect = GEO.width / GEO.height;
+
+  let renderWidth: number;
+  let renderHeight: number;
+  let offsetX: number;
+  let offsetY: number;
+
+  if (wrapAspect > svgAspect) {
+    // Container is wider than SVG - SVG fits to height, centered horizontally
+    renderHeight = height;
+    renderWidth = height * svgAspect;
+    offsetX = (width - renderWidth) / 2;
+    offsetY = 0;
+  }
+  else {
+    // Container is taller than SVG - SVG fits to width, centered vertically
+    renderWidth = width;
+    renderHeight = width / svgAspect;
+    offsetX = 0;
+    offsetY = (height - renderHeight) / 2;
+  }
+
+  const scaleX = renderWidth / GEO.width;
+  const scaleY = renderHeight / GEO.height;
+
   return {
-    left: x * scaleX,
-    top: y * scaleY,
+    left: offsetX + x * scaleX,
+    top: offsetY + y * scaleY,
   };
 }
 
@@ -808,7 +846,6 @@ onBeforeUnmount(() => {
 
     .map__route {
         opacity: 0.6;
-        stroke-width: 2.2;
         fill: none;
         stroke-linecap: round;
         stroke: rgba(255, 255, 255, 0.55);
