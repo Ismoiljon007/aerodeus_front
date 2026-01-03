@@ -87,7 +87,6 @@ const sideImages = computed(() => (props.twoImages ? limitedImages.value : limit
             }
 
             @include respond(540px) {
-              width: 170px;
               height: 247px;
             }
         }
@@ -118,7 +117,6 @@ const sideImages = computed(() => (props.twoImages ? limitedImages.value : limit
             }
 
             @include respond(630px) {
-                width: 170px;
                 height: 117px;
             }
         }
@@ -136,6 +134,11 @@ const sideImages = computed(() => (props.twoImages ? limitedImages.value : limit
         @include respond(630px) {
           gap: 10px;
         }
+
+        @include respond(540px) {
+            height: 243px;
+            width: 100%;
+          }
 
         img {
           width: calc(50% - 15px);
@@ -158,7 +161,8 @@ const sideImages = computed(() => (props.twoImages ? limitedImages.value : limit
           }
 
           @include respond(540px) {
-            height: 20rem;
+            height: 100%;
+            width: 100%;
           }
         }
       }

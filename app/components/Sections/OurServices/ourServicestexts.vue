@@ -66,7 +66,6 @@ const features = computed(() => {
 
 <style scoped lang="scss">
   .our-service-txt {
-    height: 100%;
     width: 50%;
     @media (max-width: 1200px) {
       width: 100%;
@@ -118,9 +117,13 @@ const features = computed(() => {
         margin-bottom: 1rem;
       }
     }
-    button {
+    button , a {
+      width: fit-content;
       @media (max-width: 1200px) {
         order: 4;
+      }
+      @media (max-width: 768px) {
+        width: 100%;
       }
     }
     .our-services-texts-bottom {
