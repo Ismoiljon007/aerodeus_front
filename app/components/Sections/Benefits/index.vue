@@ -99,10 +99,21 @@ onBeforeUnmount(() => {
         background: linear-gradient(0deg, #0E1530 0%, rgba(14, 21, 48, 0) 100%);
         z-index: 1;
     }
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 14rem;
+        display: block;
+        background: linear-gradient(180deg, #0E1530 0%, rgba(14, 21, 48, 0) 100%);
+        z-index: 1;
+    }
 
     .container {
         position: relative;
-        z-index: 1;
+        z-index: 2;
     }
 
     .benefits-wrapper {

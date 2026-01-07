@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBase: 'https://aerodeus.fargenius.uz/api/v1',
+      apiBase: 'https://api.aerodeus.com/api/v1',
       siteUrl: 'https://aerodeus.uz',
     },
   },
@@ -93,7 +93,7 @@ export default defineNuxtConfig({
   image: {
     quality: 80,
     format: ['webp', 'jpg'],
-    domains: ['aerodeus.fargenius.uz'],
+    domains: ['api.aerodeus.com'],
     screens: {
       xs: 320,
       sm: 640,

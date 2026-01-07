@@ -58,7 +58,7 @@ const { data } = await useAsyncData(
 );
 ```
 
-Base URL: `https://aerodeus.fargenius.uz/api/v1`
+Base URL: `https://api.aerodeus.com/api/v1`
 
 ### GSAP Animations
 
